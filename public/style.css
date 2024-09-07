@@ -198,7 +198,7 @@ label.dark-mode {
     border: none;
     box-shadow: 5px 3px 5px;
     border-radius: 10px;
-    background-image: url(//public/img/google-svgrepo-com\ \(1\).svg);
+    background-image: url(/public/img/google-svgrepo-com\ \(1\).svg);
     background-size: 60%;
     background-repeat: no-repeat;
     background-position: center;
