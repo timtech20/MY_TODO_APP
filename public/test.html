@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input Validation</title>
+  <style>
+    .error {
+      color: red;
+      display: none; 
+      /* Hide the error message initially */
+    }
+    .input-error {
+      border-color: red; /* Highlight the input border in red when there's an error */
+    }
+  </style>
+</head>
+<body>
+
+
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="username">
+  <input type="text" id="username2" name="username">
+  <div id="usernameError" class="error">This field is required!</div><br><br>
+
+  <button type="" onclick="check()">Submit</button>
+
+
+<script>
+  const usernameInput = document.getElementById('username');
+  const usernameError = document.getElementById('usernameError');
+
+  // Add 'blur' event listener to the input
+  usernameInput.addEventListener('blur', function() {
+    if (usernameInput.value.trim() === "") {
+      // If input is empty, show error
+      usernameError.style.display = 'inline';
+      usernameInput.classList.add('input-error'); // Add red border
+    } else {
+        // If input is filled, hide error
+      usernameError.style.display = 'none';
+      usernameInput.classList.remove('input-error');
+    }
+  });
+
+  // Add 'focus' event listener to reset the input style on focus
+  usernameInput.addEventListener('focus', function() {
+    usernameError.style.display = 'none'; // Hide error when focusing
+    usernameInput.classList.remove('input-error'); // Remove red border when focusing
+  });
+  
+  const check = () => {
+      if (usernameInput.value == "") {
+        //   usernameInput.click()
+          usernameError.style.display = 'inline';
+          usernameInput.classList.add('input-error'); // Add red border
+            
+        }else{
+            console.log(1345);
+
+        }
+        
+    }
+</script>
+
+</body>
+</html>
