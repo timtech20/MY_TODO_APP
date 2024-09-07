@@ -97,17 +97,21 @@ let LogInput2 = document.getElementById('LogInput2')
 const signIn = () => {
   let email = document.getElementById('email').value
   let password = document.getElementById('password').value
-  if (email == "" || password == "") {
-    document.getElementById("throwError").innerHTML = "fill the empty input"
-    setTimeout(() => {
-      document.getElementById("throwError").innerHTML = ""
-    }, 5000)
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (email.trim()== "") {
+    LogInput.classList.add('inputB')
+    document.getElementById("emailError").innerHTML = "Please fill out this field!"
+  } else if (password.trim()==""){
+    LogInput2.classList.add('inputB')
+    document.getElementById("passwordError").innerHTML = "Please fill out this field!"
+  }else if (!emailRegex.test(email)){
+    LogInput2.classList.add('inputB')
+    document.getElementById("emailError").innerHTML = "Invalid email address"
   }
   else {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in 
         const user = userCredential.user;
         console.log(user);
 
@@ -117,6 +121,7 @@ const signIn = () => {
         const errorMessage = error.message;
         console.log(errorCode);
         console.log(errorMessage);
+        document.getElementById('throwError').innerHTML='Invalid Email or Password!'
       });
   }
 }
@@ -139,7 +144,22 @@ document.getElementById('password').addEventListener('blur', ()=>{
     document.getElementById("passwordError").innerHTML = ""
   }
 })
-
+document.getElementById('password').addEventListener('focus', ()=>{
+  document.getElementById("passwordError").innerHTML = ""
+  LogInput2.classList.remove('inputB')
+})
+document.getElementById('email').addEventListener('focus', ()=>{
+  document.getElementById("emailError").innerHTML = ""
+  LogInput.classList.remove('inputB')
+})
+document.getElementById('email').addEventListener('input', ()=>{
+  document.getElementById("emailError").innerHTML = ""
+  LogInput.classList.remove('inputB')
+})
+document.getElementById('password').addEventListener('input', ()=>{
+  document.getElementById("passwordError").innerHTML = ""
+  LogInput2.classList.remove('inputB')
+})
 
 
 const inputGroup = document.getElementById('inputGroup')
@@ -173,7 +193,7 @@ const signUpp = () => {
   }
   else if (!upEmailRegex.test(emailUp)) {
   inputGroup3.classList.add('inputB3')
-    document.getElementById("emailUpError").innerHTML = "Enter a valid email!"
+    document.getElementById("emailUpError").innerHTML = "Invalid email address!"
   }
   else if (passwordUp.trim() == "") {
   inputGroup4.classList.add('inputB4')

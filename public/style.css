@@ -46,6 +46,13 @@ form {
     border: none;
     height: 40px;
 }
+.signUpBtn:active,
+.signInBtn:active {
+    background-color: #ee5e20e1;
+    color: whitesmoke;
+    border: none;
+    scale: 0.9;
+}
 
 input {
     outline: none;
@@ -173,12 +180,15 @@ label.dark-mode {
 #lastNameError,
 #emailUpError,
 #passwordUpError,
-#comPasswordUpError {
+#comPasswordUpError,
+#passwordError,
+#emailError {
     width: 100%;
     height: 10px;
     color: rgb(255, 30, 0);
     font-size: small;
     font-weight: 600;
+    font-style: italic;
 }
 
 .socialBtnG:active, 
@@ -222,7 +232,14 @@ label.dark-mode {
     /* background-color: aliceblue; */
 
 }
-
+#throwError{
+    color: rgb(255, 30, 0);
+    font-size: 18px;
+    font-weight: 600;
+    width: 100%;
+    height: 15px;
+    font-style: italic;
+}
 
 
 @media screen and  (max-width: 576px) { 
@@ -261,7 +278,10 @@ label.dark-mode {
     font-weight: 700;
 }
 
-
+.logText{
+    position: relative;
+    top: -30px;
+}
 
 .orDiv {
     justify-content: space-around;
@@ -273,6 +293,14 @@ label.dark-mode {
 
 .hrDiv {
     width: 20%;
+}
+
+.signUpBtn:hover,
+.signInBtn:hover {
+    background-color: #ee5e20e1;
+    color: whitesmoke;
+    border: none;
+    scale: 0.9;
 }
 
  }

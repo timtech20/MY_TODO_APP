@@ -27,8 +27,8 @@
       <div class="logText">
         <h1>Log In</h1>
       </div>
-      <div class="inputCon d-flex flex-column  gap-4">
-        
+      <div class="inputCon d-flex flex-column  gap-4 gp-md-5">
+        <div id="throwError"></div>
         <div class="input-con">
         <div class="input-group" id="LogInput">
           <input type="text" id="email"  class="" required autocomplete="off">
@@ -46,7 +46,7 @@
           <div id="hideLog"></div>
         </div>
       </div>
-      <div id="passwordError" class="error"></div>
+      <div id="passwordError" ></div>
     </div>
     <button onclick="signIn()" type="button" class="signInBtn rounded-pill">Sign in</button>
   </div>
@@ -67,9 +67,9 @@
     <button onclick="signInF()" type="button" class="socialBtnF"></button>
     <button onclick="signInX()" type="button" class="socialBtnX"></button>
   </div>
-  <div class="d-flex justify-content-center align-items-center">
+  <div class="d-flex justify-content-center align-items-center mt-2">
     <p>Don't have an account?</p>
-    <p onclick="signUp()" class="logDirect">sign Up</p>
+    <p onclick="signUp()" class="logDirect"> sign Up</p>
   </div>
   </form>
 
@@ -92,7 +92,7 @@
         <input type="text" id="firstName" autocomplete="off" required class="">
         <label for="firstName">Fist Name</label>
       </div>
-      <div id="firstNameError" class="error"></div>
+      <div id="firstNameError" ></div>
     </div>
       
     <div class="input-con">
@@ -100,7 +100,7 @@
       <input type="text" id="lastName" autocomplete="off" required class="">
       <label for="lastName">Last Name</label>
     </div>
-    <div id="lastNameError" class="error"></div>
+    <div id="lastNameError"></div>
   </div>
 
   <div class="input-con">
@@ -108,7 +108,7 @@
         <input type="text" id="emailUp" autocomplete="off" required class="">
         <label for="emailUp">Email</label>
       </div>
-      <div id="emailUpError" class="error"></div>
+      <div id="emailUpError"></div>
     </div>
 
     <div class="input-con">
@@ -120,7 +120,7 @@
           <div id="hide"></div>
         </div>
       </div>
-      <div id="passwordUpError" class="error"></div>
+      <div id="passwordUpError"></div>
     </div>
 
     <div class="input-con">
@@ -132,7 +132,7 @@
           <div id="hide2"></div>
         </div>
       </div>
-      <div id="comPasswordUpError" class="error"></div>
+      <div id="comPasswordUpError"></div>
     </div>
     <button onclick="signUpp()" type="button" class="signUpBtn rounded-pill" >Sign Up</button>
       </div>
