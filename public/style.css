@@ -196,7 +196,7 @@ label.dark-mode {
     height: 90%;
     background-color:#5e5d5ca8 ;
     border: none;
-    box-shadow: 5px 3px 5px;
+    box-shadow: 5px 3px 5px rgb(87, 86, 86);
     border-radius: 10px;
     background-image: url(img/google-svgrepo-com\ \(1\).svg);
     background-size: 60%;
