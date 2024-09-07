@@ -105,7 +105,7 @@ const signIn = () => {
     LogInput2.classList.add('inputB')
     document.getElementById("passwordError").innerHTML = "Please fill out this field!"
   }else if (!emailRegex.test(email)){
-    LogInput2.classList.add('inputB')
+    LogInput.classList.add('inputB')
     document.getElementById("emailError").innerHTML = "Invalid email address"
   }
   else {
@@ -150,6 +150,7 @@ document.getElementById('password').addEventListener('focus', ()=>{
 })
 document.getElementById('email').addEventListener('focus', ()=>{
   document.getElementById("emailError").innerHTML = ""
+  document.getElementById('throwError').innerHTML=''
   LogInput.classList.remove('inputB')
 })
 document.getElementById('email').addEventListener('input', ()=>{
