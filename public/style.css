@@ -148,7 +148,7 @@ label.dark-mode {
 #show,
 #show2,
 #showLog {
-    background-image: url(eye-closed-svgrepo-com\ \(1\).svg);
+    background-image: url(img/eye-closed-svgrepo-com\ \(1\).svg);
     background-size: 60%;
     background-repeat: no-repeat;
     background-position: 10px center;
@@ -160,7 +160,7 @@ label.dark-mode {
 #hide,
 #hide2,
 #hideLog {
-    background-image: url(eye-open-svgrepo-com\ \(1\).svg);
+    background-image: url(img/eye-open-svgrepo-com\ \(1\).svg);
     background-size: 60%;
     background-repeat: no-repeat;
     background-position: center;
@@ -198,18 +198,18 @@ label.dark-mode {
     border: none;
     box-shadow: 5px 3px 5px;
     border-radius: 10px;
-    background-image: url(google-svgrepo-com\ \(1\).svg);
+    background-image: url(img/google-svgrepo-com\ \(1\).svg);
     background-size: 60%;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .socialBtnF{
-    background-image: url(facebook-1-svgrepo-com.svg);
+    background-image: url(img/facebook-1-svgrepo-com.svg);
 }
 .socialBtnX{
     background-size: 45%;
-    background-image: url(svgexport-1.svg);
+    background-image: url(img/svgexport-1.svg);
 }
 
 
@@ -250,10 +250,10 @@ label.dark-mode {
 }
 
 .socialBtnF{
-    background-image: url(facebook-1-svgrepo-com.svg);
+    background-image: url(img/facebook-1-svgrepo-com.svg);
 }
 .socialBtnX{
-    background-image: url(svgexport-1.svg);
+    background-image: url(img/svgexport-1.svg);
 }
 
 .logText h1{
