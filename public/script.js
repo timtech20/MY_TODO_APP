@@ -77,7 +77,7 @@ const signInX = () => {
       console.log(user);
 
     }).catch((error) => {
-      
+
       const errorCode = error.code;
       const errorMessage = error.message;
       const email = error.customData.email;
@@ -98,66 +98,68 @@ const signIn = () => {
   let email = document.getElementById('email').value
   let password = document.getElementById('password').value
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (email.trim()== "") {
+  if (email.trim() == "") {
     LogInput.classList.add('inputB')
     document.getElementById("emailError").innerHTML = "Please fill out this field!"
-  } else if (password.trim()==""){
+  } else if (password.trim() == "") {
     LogInput2.classList.add('inputB')
     document.getElementById("passwordError").innerHTML = "Please fill out this field!"
-  }else if (!emailRegex.test(email)){
+  } else if (!emailRegex.test(email)) {
     LogInput.classList.add('inputB')
     document.getElementById("emailError").innerHTML = "Invalid email address"
   }
   else {
+    document.getElementById('con').style = "display:grid;"
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-
+        document.getElementById('con').style = "display:none;"
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode);
         console.log(errorMessage);
-        document.getElementById('throwError').innerHTML='Invalid Email or Password!'
+        document.getElementById('throwError').innerHTML = 'Invalid Email or Password!'
+        document.getElementById('con').style = "display:none;"
       });
   }
 }
 window.signIn = signIn
-document.getElementById('email').addEventListener('blur', ()=>{
-  if( document.getElementById('email').value.trim() === "" ){
+document.getElementById('email').addEventListener('blur', () => {
+  if (document.getElementById('email').value.trim() === "") {
     LogInput.classList.add('inputB')
     document.getElementById("emailError").innerHTML = "Please fill out this field!"
-  }else{
+  } else {
     LogInput.classList.remove('inputB')
     document.getElementById("emailError").innerHTML = ""
   }
 })
-document.getElementById('password').addEventListener('blur', ()=>{
-  if( document.getElementById('password').value.trim() === "" ){
+document.getElementById('password').addEventListener('blur', () => {
+  if (document.getElementById('password').value.trim() === "") {
     LogInput2.classList.add('inputB')
     document.getElementById("passwordError").innerHTML = "Please fill out this field!"
-  }else{
+  } else {
     LogInput2.classList.remove('inputB')
     document.getElementById("passwordError").innerHTML = ""
   }
 })
-document.getElementById('password').addEventListener('focus', ()=>{
+document.getElementById('password').addEventListener('focus', () => {
   document.getElementById("passwordError").innerHTML = ""
   LogInput2.classList.remove('inputB')
 })
-document.getElementById('email').addEventListener('focus', ()=>{
+document.getElementById('email').addEventListener('focus', () => {
   document.getElementById("emailError").innerHTML = ""
-  document.getElementById('throwError').innerHTML=''
+  document.getElementById('throwError').innerHTML = ''
   LogInput.classList.remove('inputB')
 })
-document.getElementById('email').addEventListener('input', ()=>{
+document.getElementById('email').addEventListener('input', () => {
   document.getElementById("emailError").innerHTML = ""
   LogInput.classList.remove('inputB')
 })
-document.getElementById('password').addEventListener('input', ()=>{
+document.getElementById('password').addEventListener('input', () => {
   document.getElementById("passwordError").innerHTML = ""
   LogInput2.classList.remove('inputB')
 })
@@ -179,57 +181,63 @@ const signUpp = () => {
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
   if (firstName.trim() == "") {
-  inputGroup.classList.add('inputB')
+    inputGroup.classList.add('inputB')
     document.getElementById("firstNameError").innerHTML = "Please fill out this field!"
   }
 
   else if (lastName.trim() == "") {
-  inputGroup2.classList.add('inputB2')
+    inputGroup2.classList.add('inputB2')
     document.getElementById("lastNameError").innerHTML = "Please fill out this field!"
   }
   else if (emailUp.trim() == "") {
-  inputGroup3.classList.add('inputB3')
+    inputGroup3.classList.add('inputB3')
     document.getElementById("emailUpError").innerHTML = "Please fill out this field!"
-    
+
   }
   else if (!upEmailRegex.test(emailUp)) {
-  inputGroup3.classList.add('inputB3')
+    inputGroup3.classList.add('inputB3')
     document.getElementById("emailUpError").innerHTML = "Invalid email address!"
   }
   else if (passwordUp.trim() == "") {
-  inputGroup4.classList.add('inputB4')
+    inputGroup4.classList.add('inputB4')
     document.getElementById("passwordUpError").innerHTML = "Please fill out this field!"
   }
   else if (!passwordRegex.test(passwordUp)) {
-  inputGroup4.classList.add('inputB4')
+    inputGroup4.classList.add('inputB4')
     document.getElementById("passwordUpError").innerHTML = "this password must be 8 characters long!"
   }
   else if (comPasswordUp.trim() == "") {
-  inputGroup5.classList.add('inputB5')
+    inputGroup5.classList.add('inputB5')
     document.getElementById("comPasswordUpError").innerHTML = "Please fill out this field!"
   }
   else if (comPasswordUp !== passwordUp) {
-  inputGroup5.classList.add('inputB5')
+    inputGroup5.classList.add('inputB5')
     document.getElementById("comPasswordUpError").innerHTML = "The password doesn't match!"
   } else {
-
+    document.getElementById('con').style = "display:grid;"
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, emailUp, passwordUp)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      console.log(user);
-      let userId = user.uid
-      let userInfo = {
-        firstName: firstName,
-        lastName: lastName,
-        email: emailUp,
-        password: passwordUp
-      }
-      let dbRef = ref(database, `user_signUp_Info/${userId}`)
-      set(dbRef, userInfo)
-      localStorage.setItem('userReload', 'signIn')
-      document.getElementById("logForm").style = "display:flex;"
-      document.getElementById("signUpForm").style = "display:none;"
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        let userId = user.uid
+        let userInfo = {
+          firstName: firstName,
+          lastName: lastName,
+          email: emailUp,
+          password: passwordUp
+        }
+        let dbRef = ref(database, `user_signUp_Info/${userId}`)
+        set(dbRef, userInfo)
+        document.getElementById('firstName').value =""
+        document.getElementById('lastName').value =""
+        document.getElementById('emailUp').value =""
+        document.getElementById('passwordUp').value =""
+        document.getElementById('comPasswordUp').value=""
+        document.getElementById('con').style = "display:none;"
+        document.getElementById("logForm").style = "display:flex;"
+        document.getElementById("signUpForm").style = "display:none;"
+        localStorage.setItem('userReload', 'signIn')
 
       })
       .catch((error) => {
@@ -237,7 +245,8 @@ const signUpp = () => {
         const errorMessage = error.message;
         console.log(errorCode);
         console.log(errorMessage);
-      document.getElementById("emailUpError").innerHTML = "email already in use!"
+        document.getElementById("emailUpError").innerHTML = "email already in use!"
+        document.getElementById('con').style = "display:none;"
       });
   }
 }
@@ -297,12 +306,12 @@ document.getElementById('emailUp').addEventListener('focus', () => {
 })
 
 document.getElementById('passwordUp').addEventListener('blur', () => {
-  if(document.getElementById('passwordUp').value.trim() === ""){
+  if (document.getElementById('passwordUp').value.trim() === "") {
     inputGroup4.classList.add('inputB4')
     document.getElementById("passwordUpError").innerHTML = "Please fill out this field!";
-    
+
   }
-  
+
 });
 document.getElementById('passwordUp').addEventListener('focus', () => {
   inputGroup4.classList.remove('inputB4')
