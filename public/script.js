@@ -96,25 +96,25 @@ let LogInput = document.getElementById('LogInput')
 let LogInput2 = document.getElementById('LogInput2')
 const signIn = () => {
   let email = document.getElementById('email').value
-  let password = document.getElementById('password').value
+  let password = document.getElementById('password').value.trim()
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (email.trim() == "") {
     LogInput.classList.add('inputB')
     document.getElementById("emailError").innerHTML = "Please fill out this field!"
-  } else if (password.trim() == "") {
-    LogInput2.classList.add('inputB')
-    document.getElementById("passwordError").innerHTML = "Please fill out this field!"
   } else if (!emailRegex.test(email)) {
     LogInput.classList.add('inputB')
     document.getElementById("emailError").innerHTML = "Invalid email address"
-  }
-  else {
+  } else if (password.trim() == "") {
+    LogInput2.classList.add('inputB')
+    document.getElementById("passwordError").innerHTML = "Please fill out this field!"
+  } else {
     document.getElementById('con').style = "display:grid;"
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
+        document.getElementById('throwError').innerHTML = ''
         document.getElementById('con').style = "display:none;"
       })
       .catch((error) => {
@@ -149,19 +149,23 @@ document.getElementById('password').addEventListener('blur', () => {
 document.getElementById('password').addEventListener('focus', () => {
   document.getElementById("passwordError").innerHTML = ""
   LogInput2.classList.remove('inputB')
+  document.getElementById('throwError').innerHTML = ''
 })
 document.getElementById('email').addEventListener('focus', () => {
   document.getElementById("emailError").innerHTML = ""
   document.getElementById('throwError').innerHTML = ''
   LogInput.classList.remove('inputB')
+  document.getElementById('throwError').innerHTML = ''
 })
 document.getElementById('email').addEventListener('input', () => {
   document.getElementById("emailError").innerHTML = ""
   LogInput.classList.remove('inputB')
+  document.getElementById('throwError').innerHTML = ''
 })
 document.getElementById('password').addEventListener('input', () => {
   document.getElementById("passwordError").innerHTML = ""
   LogInput2.classList.remove('inputB')
+  document.getElementById('throwError').innerHTML = ''
 })
 
 
@@ -175,8 +179,8 @@ const signUpp = () => {
   let firstName = document.getElementById('firstName').value
   let lastName = document.getElementById('lastName').value
   let emailUp = document.getElementById('emailUp').value
-  let passwordUp = document.getElementById('passwordUp').value
-  let comPasswordUp = document.getElementById('comPasswordUp').value
+  let passwordUp = document.getElementById('passwordUp').value.trim()
+  let comPasswordUp = document.getElementById('comPasswordUp').value.trim()
   const upEmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
@@ -333,6 +337,7 @@ comPassword.addEventListener('focus', function () {
   document.getElementById("comPasswordUpError").innerHTML = ""
 
 })
+
 
 
 
