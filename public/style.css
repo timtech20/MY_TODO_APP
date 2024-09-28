@@ -583,7 +583,7 @@ a.dark-mode {
     .utiCon {
 
         height: 100%;
-        width: 30%;
+        width: 40%;
         /* margin-left: 10px; */
         /* background-color: #ee5e20; */
         gap: 5px;
@@ -598,6 +598,8 @@ a.dark-mode {
 
     .searchBar {
         margin: 0;
+        width: 45px;
+    height: 45px;
     }
 
     .searchBarSm_N {
@@ -641,7 +643,6 @@ a.dark-mode {
     }
 
 
-
     .buttonSm {
         width: 10%;
         height: 80%;
@@ -653,7 +654,7 @@ a.dark-mode {
         width: 15%;
         gap: 5px;
         /* margin-left: 200px; */
-        transition: 400ms;
+        transition: 100ms;
     }
 
     .cancelConSm {
@@ -696,7 +697,7 @@ a.dark-mode {
         width: 100%;
         background-position: 0px center;
         background-repeat: no-repeat;
-        background-size: 100%;
+        background-size: 100% 150%;
         display: none;
     }
 
@@ -705,8 +706,7 @@ a.dark-mode {
     }
 
     .sideBarShow {
-        display: block;
-        position: absolute;
+        position: fixed;
         backdrop-filter: blur(70px) saturate(180%);
         -webkit-backdrop-filter: blur(70px) saturate(180%);
         background-color: rgba(80, 82, 87, 0.26);
@@ -714,25 +714,25 @@ a.dark-mode {
         z-index: 100;
         animation: sideBar 400ms ease-in-out;
         width: 0px;
-        height: 50%;
+        height: 80%;
         overflow-x: scroll;
         scrollbar-width: none;
     }
 
     .sideBarHide {
-        display: block;
-        position: absolute;
+        position: fixed;
+        /* position: absolute; */
         backdrop-filter: blur(70px) saturate(180%);
         -webkit-backdrop-filter: blur(70px) saturate(180%);
         background-color: rgba(80, 82, 87, 0.26);
         top: 60px;
         z-index: 100;
         animation: sideBarHide 400ms ease-in-out;
-        width: 150px;
-        height: 50%;
+        width: 70%;
+        height: 80%;
         overflow-x: scroll;
         scrollbar-width: none;
-
+        border-bottom-right-radius: 8px;
     }
 
     .dashBg {
@@ -740,7 +740,6 @@ a.dark-mode {
         height: 40px;
         z-index: 99;
         position: static;
-        left: 95%;
     }
 
     .dashBgSm {
@@ -754,7 +753,7 @@ a.dark-mode {
 
     @keyframes sideBar {
         0% {
-            width: 150px;
+            width: 70%;
             /* display: block; */
         }
 
@@ -770,7 +769,7 @@ a.dark-mode {
         }
 
         100% {
-            width: 150px;
+            width: 70%;
             /* display: none; */
         }
     }

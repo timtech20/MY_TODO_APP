@@ -93,7 +93,7 @@
                         <li>
                             <div class="" id="userEmailSm"></div>
                         </li>
-                        <li><button class="" id="signOuted">Log Out</button></li>
+                        <li><button class="" id="signOutedSm">Log Out</button></li>
                     </ul>
                 <!-- </li> -->
                 <div class="smDropDown">
@@ -279,13 +279,30 @@
             else {
                 comfirmed = false
             }
-
         });
+        document.getElementById('signOutedSm').addEventListener('click', () => {
+            let comfirmed = confirm('are sure you want to sign out')
+            if (comfirmed == true) {
+                signOut(auth)
+                    .then(() => {
+                        console.log('User signed out');
+                        window.location.href = 'index.html'
+                    })
+                    .catch((error) => {
+                        console.error('Error signing out:', error);
+                    });
+            }
+
+            else {
+                comfirmed = false
+            }
+        });
+
         let searchBtn = document.getElementById('searchBtn')
         let searchInput = document.getElementById('searchInput')
         let searchBar = document.getElementById('searchBar')
         
-        searchBtn.addEventListener('focus', () => {
+        searchBtn.addEventListener('click', () => {
             searchInput.classList.add('searchInputSm')
             searchBtn.style=""
             searchInput.focus()
@@ -343,7 +360,7 @@
             if(displayHbg.style.display==="block"){
                 hideHbg.style.display="block"
                 displayHbg.style.display="none"
-                
+                sideBar.style.display="block"
                 sideBar.classList.add('sideBarHide')
             }
             else{
@@ -351,6 +368,9 @@
                 hideHbg.style.display="none"
                 sideBar.classList.remove('sideBarHide')
                 sideBar.classList.add('sideBarShow')
+                setTimeout(() => {
+                    sideBar.style.display="none"
+                }, 400);
                 
             }
         })
