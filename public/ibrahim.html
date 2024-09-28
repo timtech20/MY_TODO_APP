@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .menu-toggle {
+            background: none;
+            border: none;
+            font-size: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        .navbar-brand {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .navbar-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-button, .theme-toggle {
+            /* background-color: #f5f5f5; */
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .search-button:hover, .theme-toggle:hover {
+            background-color: #ddd;
+        }
+        
+        .search-button i, .theme-toggle i {
+            font-size: 18px;
+        }
+        
+        .search-input {
+            display: none; /* Initially hidden */
+        }
+        
+        .active-search-input {
+            display: block;
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <!-- <div id="show"></div>
+    <button type="button" id="plused" onclick="plused()">+</button>
+    <button type="button" onclick="minu()">-</button> -->
+
+
+    <nav class="navbar">
+        <div class="navbar-left">
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i> <!-- Hamburger icon -->
+            </button>
+            <span class="navbar-brand">TODO</span>
+        </div>
+    
+        <div class="navbar-right">
+            <button class="search-button">
+                <i class="fas fa-search"></i> <!-- Search icon inside the rounded button -->
+            </button>
+            <button class="theme-toggle">
+                <i class="fas fa-sun"></i> <!-- Sun icon for light/dark mode toggle -->
+            </button>
+        </div>
+    </nav>
+    
+</body>
+
+</html>
+
+<script>
+    // let num = 1
+    // let cart = 10000
+    // let store = localStorage.getItem('loCart')
+    // document.getElementById('show').innerHTML= `${num} Total Price is ${cart}`
+    // const plused = () => {
+    //     let show = document.getElementById('show')
+    //     num++
+    //     if (num > 1) {
+    //         cart+=
+    //         show.innerHTML = `${num} Total Price is ${cart}`
+    //         let carts = `${num} Total Price is ${cart}`
+    //         localStorage.setItem('loCart', cart)
+    //     }
+    // }
+    // const minu = () => {
+    //     if (num > 1 && cart > 10000 ){
+    //         num--
+    //     cart-=10000
+    //     document.getElementById('show').innerHTML = `${num} Total Price is ${cart}`
+    //     }
+    //     else{
+    //         alert('nothing')
+    //     }
+    // }
+
+    document.querySelector('.search-button').addEventListener('click', function() {
+    const searchInput = document.querySelector('.search-input');
+    searchInput.classList.toggle('active-search-input');
+});
+
+</script>

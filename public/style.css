@@ -46,6 +46,7 @@ form {
     border: none;
     height: 40px;
 }
+
 .signUpBtn:active,
 .signInBtn:active {
     background-color: #ee5e20e1;
@@ -109,16 +110,18 @@ label {
     height: 40px;
     z-index: 99;
 }
-#light{
+
+#light {
     width: 100%;
     height: 100%;
-    background-image: url(img/light-mode-svgrepo-com\ \(1\).svg);
+    background-image: url(img/nightmode-svgrepo-com.svg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 80%;
     display: none;
 }
-#dark{
+
+#dark {
     width: 100%;
     height: 100%;
     background-image: url(img/light-mode-svgrepo-com.svg);
@@ -127,28 +130,52 @@ label {
     background-size: 80%;
 }
 
-.dashBg{
+.dashBg {
     width: 40px;
     height: 40px;
     z-index: 99;
+    position: absolute;
+    left: 95%;
 }
 
 
 body.light-mode,
-input.light-mode,
 label.light-mode {
-    transition: 0.9s ;
+    transition: 0.9s;
     background-color: whitesmoke;
     color: rgb(32, 32, 32);
 }
 
+input.light-mode {
+    color: rgb(32, 32, 32);
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a.light-mode {
+    color: rgb(32, 32, 32);
+    background-color: transparent;
+    text-decoration: none;
+
+}
+
 
 body.dark-mode,
-input.dark-mode,
 label.dark-mode {
-    transition: 0.9s ;
+    transition: 0.9s;
     background-color: rgb(32, 32, 32);
     color: white;
+}
+
+input.dark-mode {
+    background-color: transparent;
+    color: white;
+}
+
+a.dark-mode {
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
 }
 
 #showPassBtn,
@@ -197,20 +224,21 @@ label.dark-mode {
     font-style: italic;
 }
 
-.socialBtnG:active, 
-.socialBtnF:active, 
-.socialBtnX:active{
+.socialBtnG:active,
+.socialBtnF:active,
+.socialBtnX:active {
     box-shadow: none;
-    scale: 0,7;
+    scale: 0, 7;
 
 }
-.socialBtnG, 
-.socialBtnF, 
-.socialBtnX{
+
+.socialBtnG,
+.socialBtnF,
+.socialBtnX {
 
     width: 10%;
     height: 90%;
-    background-color:#5e5d5ca8 ;
+    background-color: #5e5d5ca8;
     border: none;
     box-shadow: 5px 3px 5px rgb(87, 86, 86);
     border-radius: 10px;
@@ -220,16 +248,17 @@ label.dark-mode {
     background-position: center;
 }
 
-.socialBtnF{
+.socialBtnF {
     background-image: url(img/facebook-1-svgrepo-com.svg);
 }
-.socialBtnX{
+
+.socialBtnX {
     background-size: 45%;
     background-image: url(img/svgexport-1.svg);
 }
 
 
-.socialBtnCon{
+.socialBtnCon {
     display: flex;
     align-items: center;
     width: 100%;
@@ -238,7 +267,8 @@ label.dark-mode {
     /* background-color: aliceblue; */
 
 }
-#throwError{
+
+#throwError {
     color: rgb(255, 30, 0);
     font-size: 18px;
     font-weight: 600;
@@ -282,7 +312,7 @@ label.dark-mode {
     flex-direction: column;
     animation: rotateDiv 1.4s infinite linear;
     gap: 5px;
-    
+
 }
 
 .spaned1 {
@@ -291,7 +321,8 @@ label.dark-mode {
     background-color: black;
     border-radius: 50%;
 }
-#forgetPass{
+
+#forgetPass {
     position: relative;
     top: -10px;
     text-indent: 10px;
@@ -309,11 +340,11 @@ label.dark-mode {
     100% {
         rotate: 360deg;
         scale: 0.5;
-    } 
+    }
 
- } 
+}
 
- .navBar{
+.navBar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -322,91 +353,425 @@ label.dark-mode {
     backdrop-filter: blur(1px) saturate(180%);
     -webkit-backdrop-filter: blur(1px) saturate(180%);
     background-color: rgba(80, 82, 87, 0.26);
-    padding: 0px 80px;
+    padding: 0px 20px;
     position: fixed;
-    top:0px;
+    top: 0px;
     right: 0px;
     left: 0px;
     z-index: 99;
- }
+}
 
- ul{
+
+
+.alltodo {
+    margin-top: 90px;
+}
+
+.searchBar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 400ms;
+    cursor: pointer;
+    /* margin-right: 200px; */
+}
+
+.searchBarSm_N {
+    width: 95%;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid #a8a8a8a8;
+    transition: 400ms;
+}
+
+.searchBarSm_L {
+    transition: 400ms;
+    width: 95%;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid #2e2d2da8;
+}
+
+.searchInput {
+    display: none;
+    height: 100%;
+    border: none;
+    outline: none;
+}
+
+.searchInputSm {
+    width: 89%;
+    display: block;
+    outline: none;
+    background-color: transparent;
+}
+
+.searchBtn {
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: center;
+
+}
+
+.buttonSm_L {
+    width: 7%;
+    height: 90%;
+    background-color: transparent;
+    background-image: url(img/search-alt-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden;
+
+}
+
+.buttonSm_N {
+    width: 7%;
+    height: 90%;
+    background-color: transparent;
+    background-image: url(img/search-light-mode.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden;
+
+}
+
+.cancelCon {
+    /* background-color: #ee5e20; */
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    height: 100%;
+    /* margin-left: 200px; */
+    overflow: hidden;
+    transition: 400ms;
+}
+
+.cancelConSm {
+    /* background-color: #ee5e20; */
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    height: 100%;
+    /* margin-left: 200px; */
+}
+
+.cancelBtn {
+    display: none;
+}
+
+.utiCon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: auto;
+    /* background-color: #ee5e20; */
+    gap: 20px;
+}
+
+
+.ulCon {
     display: flex;
     justify-content: center;
     align-items: center;
     list-style: none;
-    gap: 20px;
- }
+    gap: 10px;
+    height: 100%;
+    /* background-color: aquamarine; */
+}
 
- .alltodo{
-    margin-top: 90px;
- }
+.conForSearch_bgChanger {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 80%;
+    height: 100%;
+}
 
 
-@media screen and  (max-width: 576px) { 
-    form{
+.logo {
+    /* background-color: aliceblue; */
+    width: 40%;
+    font-weight: 800;
+    /* font-size: 2em; */
+    /* height: 100%; */
+}
+
+@media screen and (max-width: 570px) {
+    form {
         padding: 0px 30px;
         margin-top: 50px;
     }
 
-    .socialBtnG:active, 
-.socialBtnF:active, 
-.socialBtnX:active,
-.socialBtnG:hover, 
-.socialBtnF:hover, 
-.socialBtnX:hover{
-    box-shadow: none;
-    scale: 0,9;
+    .socialBtnG:active,
+    .socialBtnF:active,
+    .socialBtnX:active,
+    .socialBtnG:hover,
+    .socialBtnF:hover,
+    .socialBtnX:hover {
+        box-shadow: none;
+        scale: 0, 9;
 
+    }
+
+    .socialBtnG,
+    .socialBtnF,
+    .socialBtnX {
+
+        width: 15%;
+        background-color: transparent;
+        border: none;
+        box-shadow: 5px 3px 5px rgb(87, 86, 86);
+        height: 90%;
+        border: 1px solid #5e5d5ca8;
+    }
+
+
+    .socialBtnF {
+        background-image: url(img/facebook-1-svgrepo-com.svg);
+    }
+
+    .socialBtnX {
+        background-image: url(img/svgexport-1.svg);
+    }
+
+    .logText h1 {
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    .logText {
+        position: relative;
+        top: -30px;
+    }
+
+    .orDiv {
+        justify-content: space-around;
+        align-items: center;
+        height: 60px;
+        margin-top: 0px;
+        padding: 0px 1px;
+    }
+
+    .hrDiv {
+        width: 20%;
+    }
+
+    .signUpBtn:hover,
+    .signInBtn:hover {
+        background-color: #ee5e20e1;
+        color: whitesmoke;
+        border: none;
+        scale: 0.9;
+    }
+
+    .navBar {
+        height: 60px;
+        padding: 0px 10px;
+    }
+
+    .utiCon {
+
+        height: 100%;
+        width: 30%;
+        /* margin-left: 10px; */
+        /* background-color: #ee5e20; */
+        gap: 5px;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .utiConSm {
+        display: none;
+
+    }
+
+    .searchBar {
+        margin: 0;
+    }
+
+    .searchBarSm_N {
+        width: 80%;
+        height: 40px;
+        border-radius: 20px;
+        border: 1px solid #a8a8a8a8;
+        transition: 400ms;
+    }
+
+    .searchBarSm_L {
+        transition: 400ms;
+        width: 80%;
+        height: 40px;
+        border-radius: 20px;
+        border: 1px solid #2e2d2da8;
+    }
+
+
+    .searchInput {
+        display: none;
+        height: 100%;
+        border: none;
+        outline: none;
+        background-color: transparent;
+    }
+
+    .searchInputSm {
+        width: 87%;
+        display: block;
+        outline: none;
+        background-color: transparent;
+    }
+
+    .conForSearch_bgChanger {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        width: 100%;
+    
+    }
+
+
+
+    .buttonSm {
+        width: 10%;
+        height: 80%;
+
+    }
+
+    .cancelCon {
+        /* background-color: #ee5e20; */
+        width: 15%;
+        gap: 5px;
+        /* margin-left: 200px; */
+        transition: 400ms;
+    }
+
+    .cancelConSm {
+        /* background-color: #ee5e20; */
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        /* margin-left: 200px; */
+    }
+
+    .hbgToggle {
+        height: 100%;
+        width: 35%;
+        /* background-color: aliceblue; */
+    }
+
+    .logo {
+        /* background-color: aliceblue; */
+        width: auto;
+        font-weight: 700;
+        font-size: 1.3em;
+        height: auto;
+        letter-spacing: 1px;
+    }
+
+    #displayHbg {
+        height: 100%;
+        width: 100%;
+        background-position: 0px center;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        display: block;
+    }
+
+    #hideHbg {
+        transition: 4s;
+        height: 100%;
+        width: 100%;
+        background-position: 0px center;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        display: none;
+    }
+
+    .sideBar {
+        display: none;
+    }
+
+    .sideBarShow {
+        display: block;
+        position: absolute;
+        backdrop-filter: blur(70px) saturate(180%);
+        -webkit-backdrop-filter: blur(70px) saturate(180%);
+        background-color: rgba(80, 82, 87, 0.26);
+        top: 60px;
+        z-index: 100;
+        animation: sideBar 400ms ease-in-out;
+        width: 0px;
+        height: 50%;
+        overflow-x: scroll;
+        scrollbar-width: none;
+    }
+
+    .sideBarHide {
+        display: block;
+        position: absolute;
+        backdrop-filter: blur(70px) saturate(180%);
+        -webkit-backdrop-filter: blur(70px) saturate(180%);
+        background-color: rgba(80, 82, 87, 0.26);
+        top: 60px;
+        z-index: 100;
+        animation: sideBarHide 400ms ease-in-out;
+        width: 150px;
+        height: 50%;
+        overflow-x: scroll;
+        scrollbar-width: none;
+
+    }
+
+    .dashBg {
+        width: 40px;
+        height: 40px;
+        z-index: 99;
+        position: static;
+        left: 95%;
+    }
+
+    .dashBgSm {
+        display: none;
+    }
+
+    .ulConSb {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    @keyframes sideBar {
+        0% {
+            width: 150px;
+            /* display: block; */
+        }
+
+        100% {
+            width: 0px;
+            display: none;
+        }
+    }
+
+    @keyframes sideBarHide {
+        0% {
+            width: 0px;
+        }
+
+        100% {
+            width: 150px;
+            /* display: none; */
+        }
+    }
 }
-.socialBtnG, 
-.socialBtnF, 
-.socialBtnX{
-
-    width: 15%;
-    background-color:transparent;
-    border: none;
-    box-shadow: 5px 3px 5px rgb(87, 86, 86);
-    height: 90%;
-    border: 1px solid #5e5d5ca8;
-}
-
-
-.socialBtnF{
-    background-image: url(img/facebook-1-svgrepo-com.svg);
-}
-.socialBtnX{
-    background-image: url(img/svgexport-1.svg);
-}
-
-.logText h1{
-    font-size: 30px;
-    font-weight: 700;
-}
-
-.logText{
-    position: relative;
-    top: -30px;
-}
-
-.orDiv {
-    justify-content: space-around;
-    align-items: center;
-    height: 60px;
-    margin-top: 0px;
-    padding: 0px 1px;
-}
-
-.hrDiv {
-    width: 20%;
-}
-
-.signUpBtn:hover,
-.signInBtn:hover {
-    background-color: #ee5e20e1;
-    color: whitesmoke;
-    border: none;
-    scale: 0.9;
-}
-
- }

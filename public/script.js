@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, FacebookAuthProvider, TwitterAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCoYc2Uqe0rywPdzOhJytjMpCOXHJQhDiI",
@@ -26,11 +26,9 @@ const signInG = () => {
   signInWithPopup(auth, provider)
     .then((result) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
       const user = result.user;
       console.log(user);
-
-
+      window.location.href = 'dashboard.html';
     }).catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -50,6 +48,7 @@ const signInF = () => {
     .then((result) => {
       const user = result.user;
       console.log(user);
+      window.location.href = 'dashboard.html';
 
     })
     .catch((error) => {
@@ -75,6 +74,7 @@ const signInX = () => {
       const secret = credential.secret;
       const user = result.user;
       console.log(user);
+      window.location.href = 'dashboard.html';
 
     }).catch((error) => {
 
@@ -95,16 +95,16 @@ window.signInX = signInX
 let LogInput = document.getElementById('LogInput')
 let LogInput2 = document.getElementById('LogInput2')
 const signIn = () => {
-  let email = document.getElementById('email').value
+  let email = document.getElementById('email').value.trim()
   let password = document.getElementById('password').value.trim()
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (email.trim() == "") {
+  if (email == "") {
     LogInput.classList.add('inputB')
     document.getElementById("emailError").innerHTML = "Please fill out this field!"
   } else if (!emailRegex.test(email)) {
     LogInput.classList.add('inputB')
     document.getElementById("emailError").innerHTML = "Invalid email address"
-  } else if (password.trim() == "") {
+  } else if (password == "") {
     LogInput2.classList.add('inputB')
     document.getElementById("passwordError").innerHTML = "Please fill out this field!"
   } else {
@@ -114,8 +114,11 @@ const signIn = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
+        // fetchAndDisplayUserData(user.uid)
         document.getElementById('throwError').innerHTML = ''
         document.getElementById('con').style = "display:none;"
+        window.location.href = 'dashboard.html';
+
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -128,45 +131,7 @@ const signIn = () => {
   }
 }
 window.signIn = signIn
-document.getElementById('email').addEventListener('blur', () => {
-  if (document.getElementById('email').value.trim() === "") {
-    LogInput.classList.add('inputB')
-    document.getElementById("emailError").innerHTML = "Please fill out this field!"
-  } else {
-    LogInput.classList.remove('inputB')
-    document.getElementById("emailError").innerHTML = ""
-  }
-})
-document.getElementById('password').addEventListener('blur', () => {
-  if (document.getElementById('password').value.trim() === "") {
-    LogInput2.classList.add('inputB')
-    document.getElementById("passwordError").innerHTML = "Please fill out this field!"
-  } else {
-    LogInput2.classList.remove('inputB')
-    document.getElementById("passwordError").innerHTML = ""
-  }
-})
-document.getElementById('password').addEventListener('focus', () => {
-  document.getElementById("passwordError").innerHTML = ""
-  LogInput2.classList.remove('inputB')
-  document.getElementById('throwError').innerHTML = ''
-})
-document.getElementById('email').addEventListener('focus', () => {
-  document.getElementById("emailError").innerHTML = ""
-  document.getElementById('throwError').innerHTML = ''
-  LogInput.classList.remove('inputB')
-  document.getElementById('throwError').innerHTML = ''
-})
-document.getElementById('email').addEventListener('input', () => {
-  document.getElementById("emailError").innerHTML = ""
-  LogInput.classList.remove('inputB')
-  document.getElementById('throwError').innerHTML = ''
-})
-document.getElementById('password').addEventListener('input', () => {
-  document.getElementById("passwordError").innerHTML = ""
-  LogInput2.classList.remove('inputB')
-  document.getElementById('throwError').innerHTML = ''
-})
+
 
 
 const inputGroup = document.getElementById('inputGroup')
@@ -175,7 +140,6 @@ const inputGroup3 = document.getElementById('inputGroup3')
 const inputGroup4 = document.getElementById('inputGroup4')
 const inputGroup5 = document.getElementById('inputGroup5')
 const signUpp = () => {
-
   let firstName = document.getElementById('firstName').value
   let lastName = document.getElementById('lastName').value
   let emailUp = document.getElementById('emailUp').value
@@ -232,16 +196,19 @@ const signUpp = () => {
           password: passwordUp
         }
         let dbRef = ref(database, `user_signUp_Info/${userId}`)
-        set(dbRef, userInfo)
-        document.getElementById('firstName').value =""
-        document.getElementById('lastName').value =""
-        document.getElementById('emailUp').value =""
-        document.getElementById('passwordUp').value =""
-        document.getElementById('comPasswordUp').value=""
-        document.getElementById('con').style = "display:none;"
-        document.getElementById("logForm").style = "display:flex;"
-        document.getElementById("signUpForm").style = "display:none;"
-        localStorage.setItem('userReload', 'signIn')
+        set(dbRef, userInfo).then(() => {
+
+          document.getElementById('firstName').value = ""
+          document.getElementById('lastName').value = ""
+          document.getElementById('emailUp').value = ""
+          document.getElementById('passwordUp').value = ""
+          document.getElementById('comPasswordUp').value = ""
+          document.getElementById('con').style = "display:none;"
+          document.getElementById("logForm").style = "display:flex;"
+          document.getElementById("signUpForm").style = "display:none;"
+          localStorage.setItem('userReload', 'signIn')
+        })
+
 
       })
       .catch((error) => {
@@ -256,87 +223,22 @@ const signUpp = () => {
 }
 window.signUpp = signUpp
 
-document.getElementById('firstName').addEventListener('input', () => {
-  inputGroup.classList.remove('inputB')
-  document.getElementById("firstNameError").innerHTML = "";
-});
-document.getElementById('lastName').addEventListener('input', () => {
-  inputGroup2.classList.remove('inputB2')
-  document.getElementById("lastNameError").innerHTML = "";
-});
-document.getElementById('emailUp').addEventListener('input', () => {
-  inputGroup3.classList.remove('inputB3')
-  document.getElementById("emailUpError").innerHTML = "";
-});
-document.getElementById('passwordUp').addEventListener('input', () => {
-  inputGroup4.classList.remove('inputB4')
-  document.getElementById("passwordUpError").innerHTML = "";
-});
-document.getElementById('comPasswordUp').addEventListener('input', () => {
-  inputGroup5.classList.remove('inputB5')
-  document.getElementById("comPasswordUpError").innerHTML = "";
-});
-document.getElementById('firstName').addEventListener('blur', () => {
-  if (document.getElementById('firstName').value.trim() === "") {
-    inputGroup.classList.add('inputB')
-    document.getElementById("firstNameError").innerHTML = "Please fill out this field!";
-  }
-});
-document.getElementById('firstName').addEventListener('focus', () => {
-  inputGroup.classList.remove('inputB')
-  document.getElementById("firstNameError").innerHTML = "";
-})
+// const fetchAndDisplayUserData = (userId) => {
+//   const dbRef = ref(database, `user_signUp_Info/${userId}`);
+//   get(dbRef)
+//     .then((snapshot) => {
+//       if (snapshot.exists()) {
+//         window.location.href = 'dashboard.html';
+//       }
+//       else {
+//         document.getElementById('throwError').innerHTML = 'Invalid Email or Password!'
+//       }
+//     }).catch((error) => {
+//       console.error(error);
+//     });
+// };
 
-document.getElementById('lastName').addEventListener('blur', () => {
-  if (document.getElementById('lastName').value.trim() === "") {
-    inputGroup2.classList.add('inputB2')
-    document.getElementById("lastNameError").innerHTML = "Please fill out this field!";
-  }
-});
-document.getElementById('lastName').addEventListener('focus', () => {
-  inputGroup2.classList.remove('inputB2')
-  document.getElementById("lastNameError").innerHTML = "";
-})
 
-document.getElementById('emailUp').addEventListener('blur', () => {
-  if (document.getElementById('emailUp').value.trim() === "") {
-    inputGroup3.classList.add('inputB3')
-    document.getElementById("emailUpError").innerHTML = "Please fill out this field!";
-  }
-});
-document.getElementById('emailUp').addEventListener('focus', () => {
-  inputGroup3.classList.remove('inputB3')
-  document.getElementById("emailUpError").innerHTML = "";
-})
-
-document.getElementById('passwordUp').addEventListener('blur', () => {
-  if (document.getElementById('passwordUp').value.trim() === "") {
-    inputGroup4.classList.add('inputB4')
-    document.getElementById("passwordUpError").innerHTML = "Please fill out this field!";
-
-  }
-
-});
-document.getElementById('passwordUp').addEventListener('focus', () => {
-  inputGroup4.classList.remove('inputB4')
-  document.getElementById("passwordUpError").innerHTML = "";
-})
-
-const comPassword = document.getElementById('comPasswordUp')
-comPassword.addEventListener('blur', function () {
-  if (comPassword.value.trim() === "") {
-    inputGroup5.classList.add('inputB5')
-    document.getElementById("comPasswordUpError").innerHTML = "Please fill out this field!"
-  } else {
-    inputGroup5.classList.remove('inputB5')
-    document.getElementById("comPasswordUpError").innerHTML = ""
-  }
-})
-comPassword.addEventListener('focus', function () {
-  inputGroup5.classList.remove('inputB5')
-  document.getElementById("comPasswordUpError").innerHTML = ""
-
-})
 
 
 

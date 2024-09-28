@@ -7,7 +7,7 @@
   <title>Sign in page</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style.css">
@@ -31,7 +31,7 @@
         <div id="throwError"></div>
         <div class="input-con">
         <div class="input-group" id="LogInput">
-          <input type="text" id="email"  class="" required autocomplete="off">
+          <input type="email " id="email"  class="" required autocomplete="off">
           <label id="input-label">email</label>
         </div>
         <div id="emailError" class="error"></div>
@@ -106,7 +106,7 @@
 
   <div class="input-con">
     <div class="input-group" id="inputGroup3">
-        <input type="text" id="emailUp" autocomplete="off" required class="">
+        <input type="email" id="emailUp" autocomplete="off" required class="">
         <label for="emailUp">Email</label>
       </div>
       <div id="emailUpError"></div>
@@ -177,7 +177,7 @@
     </div>
     </div>
   
-  <script src="script.js" type="module"></script>
+  <script defer src="script.js" type="module"></script>
   <script>
 
 
@@ -292,6 +292,136 @@ document.getElementById('light').style="display:none;"
       document.getElementById('dark').style="display:none;"
       }
     })
+
+let LogInput = document.getElementById('LogInput')
+let LogInput2 = document.getElementById('LogInput2')
+    document.getElementById('email').addEventListener('blur', () => {
+  if (document.getElementById('email').value.trim() === "") {
+    LogInput.classList.add('inputB')
+    document.getElementById("emailError").innerHTML = "Please fill out this field!"
+  } else {
+    LogInput.classList.remove('inputB')
+    document.getElementById("emailError").innerHTML = ""
+  }
+})
+document.getElementById('password').addEventListener('blur', () => {
+  if (document.getElementById('password').value.trim() === "") {
+    LogInput2.classList.add('inputB')
+    document.getElementById("passwordError").innerHTML = "Please fill out this field!"
+  } else {
+    LogInput2.classList.remove('inputB')
+    document.getElementById("passwordError").innerHTML = ""
+  }
+})
+document.getElementById('password').addEventListener('focus', () => {
+  document.getElementById("passwordError").innerHTML = ""
+  LogInput2.classList.remove('inputB')
+  document.getElementById('throwError').innerHTML = ''
+})
+document.getElementById('email').addEventListener('focus', () => {
+  document.getElementById("emailError").innerHTML = ""
+  document.getElementById('throwError').innerHTML = ''
+  LogInput.classList.remove('inputB')
+  document.getElementById('throwError').innerHTML = ''
+})
+document.getElementById('email').addEventListener('input', () => {
+  document.getElementById("emailError").innerHTML = ""
+  LogInput.classList.remove('inputB')
+  document.getElementById('throwError').innerHTML = ''
+})
+document.getElementById('password').addEventListener('input', () => {
+  document.getElementById("passwordError").innerHTML = ""
+  LogInput2.classList.remove('inputB')
+  document.getElementById('throwError').innerHTML = ''
+})
+
+const inputGroup = document.getElementById('inputGroup')
+const inputGroup2 = document.getElementById('inputGroup2')
+const inputGroup3 = document.getElementById('inputGroup3')
+const inputGroup4 = document.getElementById('inputGroup4')
+const inputGroup5 = document.getElementById('inputGroup5')
+document.getElementById('firstName').addEventListener('input', () => {
+  inputGroup.classList.remove('inputB')
+  document.getElementById("firstNameError").innerHTML = "";
+});
+document.getElementById('lastName').addEventListener('input', () => {
+  inputGroup2.classList.remove('inputB2')
+  document.getElementById("lastNameError").innerHTML = "";
+});
+document.getElementById('emailUp').addEventListener('input', () => {
+  inputGroup3.classList.remove('inputB3')
+  document.getElementById("emailUpError").innerHTML = "";
+});
+document.getElementById('passwordUp').addEventListener('input', () => {
+  inputGroup4.classList.remove('inputB4')
+  document.getElementById("passwordUpError").innerHTML = "";
+});
+document.getElementById('comPasswordUp').addEventListener('input', () => {
+  inputGroup5.classList.remove('inputB5')
+  document.getElementById("comPasswordUpError").innerHTML = "";
+});
+document.getElementById('firstName').addEventListener('blur', () => {
+  if (document.getElementById('firstName').value.trim() === "") {
+    inputGroup.classList.add('inputB')
+    document.getElementById("firstNameError").innerHTML = "Please fill out this field!";
+  }
+});
+document.getElementById('firstName').addEventListener('focus', () => {
+  inputGroup.classList.remove('inputB')
+  document.getElementById("firstNameError").innerHTML = "";
+})
+
+document.getElementById('lastName').addEventListener('blur', () => {
+  if (document.getElementById('lastName').value.trim() === "") {
+    inputGroup2.classList.add('inputB2')
+    document.getElementById("lastNameError").innerHTML = "Please fill out this field!";
+  }
+});
+document.getElementById('lastName').addEventListener('focus', () => {
+  inputGroup2.classList.remove('inputB2')
+  document.getElementById("lastNameError").innerHTML = "";
+})
+
+document.getElementById('emailUp').addEventListener('blur', () => {
+  if (document.getElementById('emailUp').value.trim() === "") {
+    inputGroup3.classList.add('inputB3')
+    document.getElementById("emailUpError").innerHTML = "Please fill out this field!";
+  }
+});
+document.getElementById('emailUp').addEventListener('focus', () => {
+  inputGroup3.classList.remove('inputB3')
+  document.getElementById("emailUpError").innerHTML = "";
+})
+
+document.getElementById('passwordUp').addEventListener('blur', () => {
+  if (document.getElementById('passwordUp').value.trim() === "") {
+    inputGroup4.classList.add('inputB4')
+    document.getElementById("passwordUpError").innerHTML = "Please fill out this field!";
+
+  }
+
+});
+document.getElementById('passwordUp').addEventListener('focus', () => {
+  inputGroup4.classList.remove('inputB4')
+  document.getElementById("passwordUpError").innerHTML = "";
+})
+
+const comPassword = document.getElementById('comPasswordUp')
+comPassword.addEventListener('blur', function () {
+  if (comPassword.value.trim() === "") {
+    inputGroup5.classList.add('inputB5')
+    document.getElementById("comPasswordUpError").innerHTML = "Please fill out this field!"
+  } else {
+    inputGroup5.classList.remove('inputB5')
+    document.getElementById("comPasswordUpError").innerHTML = ""
+  }
+})
+comPassword.addEventListener('focus', function () {
+  inputGroup5.classList.remove('inputB5')
+  document.getElementById("comPasswordUpError").innerHTML = ""
+
+})
+
 
   </script>
 </body>

@@ -7,122 +7,371 @@
     <title>tod list</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    
-    <body>
-        <nav class="navBar">
-            <ul class="">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="">
-                  <a class="" href="">Link</a>
-                </li>
-                <li class=" dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navBar">
+        <div class="utiCon" id="utiCon">
+            <div id="hbgToggle" class="hbgToggle d-md-none d-ms-block">
+                <div id="displayHbg"></div>
+                <div id="hideHbg"></div>
+                </div>
+        <div id="logo" class="logo">TODO</div>
+        <div class="ulCon d-none d-lg-flex d-md-flex ">
+            <li class="">
+                <a class="" href="#">Home</a>
+            </li>
+            <li class="">
+                <!-- <a class="" href="">All Todo</a> -->
+            </li>
+            <!-- <li class=" dropdown"> -->
+                <div class="dropDD nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false" id="pfpDisplay">
+                    header
+                </div>
+                <ul class="dropdown-menu ">
+                    <li>
+                        <div class="dropdown-item" id="userName"></div>
+                    </li>
+                    <li>
+                        <div class="dropdown-item" id="userEmail"></div>
+                    </li>
+                    <li><button class="" id="signOuted">Log Out</button></li>
+                </ul>
+            <!-- </li> -->
+            <li class=" dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Task List
-                  </a>
-                  <ul class="dropdown-menu ">
+                </a>
+                <ul class="dropdown-menu ">
                     <li><a class="dropdown-item" href="">Scheduled</a></li>
                     <li><a class="dropdown-item" href="">Completed</a></li>
                     <li><a class="dropdown-item" href="">today</a></li>
-                  </ul>
-                </li>
-              </ul>
-        <div class="d-flex" >
-            <input class=" " type="search" placeholder="Search" aria-label="Search">
-            <button class="" type="button">Search</button>
+                </ul>
+            </li>
         </div>
+        </div>
+        
+        <div id="conForSearch_bgChanger" class="conForSearch_bgChanger">
+            <div id="cancelCon" class="cancelCon">
+        <div class="searchBar" tabindex="0" id="searchBar" >            
+        <input type="search" placeholder="Search" id="searchInput" class="searchInput" autocomplete="off">
+            <button type="button" id="searchBtn" class="searchBtn"></button>
+        </div>
+        <span onclick="cancelBtn" id="cancelBtn" class="cancelBtn">Cancel</span>
+    </div>
         <div id="bgChanger" class="dashBg">
             <div id="light"></div>
             <div id="dark"></div>
         </div>
+        </div>
     </nav>
 
-    <section class="alltodo">
-        <div id="showAllTodo"></div>
-
+    <section class="alltodo ">
+        <div id="showAllTodo "></div>
+        <div id="sideBar" class="sideBar d-lg-none d-md-none">
+            <div class="ulConSb">
+                <li class="">
+                    <a class="" href="#">Home</a>
+                </li>
+                <li class="">
+                    <!-- <a class="" href="">All Todo</a> -->
+                </li>
+                <!-- <li class=" dropdown"> -->
+                    <div class="dropDD"  id="pfpDisplaySm">
+                        header
+                    </div>
+                    <ul class="">
+                        <li>
+                            <div class="" id="userNameSm"></div>
+                        </li>
+                        <li>
+                            <div class="" id="userEmailSm"></div>
+                        </li>
+                        <li><button class="" id="signOuted">Log Out</button></li>
+                    </ul>
+                <!-- </li> -->
+                <div class="smDropDown">
+                    dro
+                    <ul class=" ">
+                        <li><a class="" href="">Scheduled</a></li>
+                        <li><a class="" href="">Completed</a></li>
+                        <li><a class="" href="">today</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <!-- Button trigger modal -->
-         <!-- <div id="smScreen" class=" d-lg-none d-block"> -->
-             
-             <!-- Modal -->
-             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered ">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Enter Todo</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- <div id="smScreen" class=" d-lg-none d-block"> -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Enter Todo</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" placeholder="Title">
+                        <textarea name="tyg" id="" cols="50"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Done</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <input type="text" placeholder="Title">
-          <textarea name="tyg" id="" cols="50"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Done</button>
-        </div>
-      </div>
-    </div>
-</div>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    
-  </button>
-  <!-- </div> -->
+        <!-- Button trigger modal -->
+        <button type="button" class=" btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            add Todo
+        </button>
+        <!-- </div> -->
+
+        <button onclick="addTodo()"></button>
     </section>
-    
-  <script src="script.js" type="module"></script>
-    <script>
-                    // background color toggle
 
-  const bgChanger = document.getElementById('bgChanger');
-    const elementsToToggle = document.querySelectorAll('body, label, input');
-    let darkMode = localStorage.getItem('darkMode')
+    <script defer src="script.js" type="module"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+        import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 
-
-    const enableDark = () => {
-
-      elementsToToggle.forEach(elements => {
-        elements.classList.add('dark-mode')
-        elements.classList.remove('light-mode')
-      });
-      localStorage.setItem('darkMode', 'enabled')
-    }
-    const disableDark = () => {
-      elementsToToggle.forEach(elements => {
-        elements.classList.add('light-mode')
-        elements.classList.remove('dark-mode')
-      });
-      localStorage.setItem('darkMode', 'disabled')
-    }
+        const firebaseConfig = {
+            apiKey: "AIzaSyCoYc2Uqe0rywPdzOhJytjMpCOXHJQhDiI",
+            authDomain: "mytodoapp-5e8a8.firebaseapp.com",
+            databaseURL: "https://mytodoapp-5e8a8-default-rtdb.firebaseio.com",
+            projectId: "mytodoapp-5e8a8",
+            storageBucket: "mytodoapp-5e8a8.appspot.com",
+            messagingSenderId: "810814520509",
+            appId: "1:810814520509:web:3e9ac758a37e3583178bd4"
+        };
 
 
-    if (darkMode == 'enabled') {
-      enableDark()
-      document.getElementById('light').style="display:block;"
-      document.getElementById('dark').style="display:none;"
-    } else {
-      disableDark()
-      document.getElementById('light').style="display:none;"
-      document.getElementById('dark').style="display:block;"
-    }
-    
-    bgChanger.addEventListener('click', () => {
-      darkMode = localStorage.getItem('darkMode')
-      if (darkMode == 'enabled') {
-        disableDark()
-document.getElementById('light').style="display:none;"
-      document.getElementById('dark').style="display:block;"
-      } else {
-        enableDark()
-      document.getElementById('light').style="display:block;"
-      document.getElementById('dark').style="display:none;"
-      }
-    })
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const database = getDatabase(app);
+
+
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const userId = user.uid;
+
+                const dbRef = ref(database, `user_signUp_Info/${userId}`);
+                get(dbRef)
+                    .then((snapshot) => {
+                        let personName = user.displayName || `${snapshot.val().firstName} ${snapshot.val().lastName}`
+                        let email = user.email
+                        let pic = user.photoURL
+                        userName.innerHTML = `Welcome ${personName}</h3>`
+                        userEmail.innerHTML =`Your email is ${email}</p>`
+                        pfpDisplay.innerHTML=`
+                    <img src=${pic} alt="Profile pic" / width="30" style="border-radius: 50% ;">`
+                        userNameSm.innerHTML = `Welcome ${personName}</h3>`
+                        userEmailSm.innerHTML =`Your email is ${email}</p>`
+                        pfpDisplaySm.innerHTML=`
+                    <img src=${pic} alt="Profile pic" / width="30" style="border-radius: 50% ;">
+                    `;
+
+                        console.log(personName);
+
+                        console.log(user);
+                        if (snapshot.exists()) {
+                            const userData = snapshot.val();
+                            userName.innerHTML = `Welcome: ${personName}`
+                            userEmail.innerHTML = `Your email is: ${userData.email}`
+                        } else {
+                            console.log("No data available");
+                        }
+                    }).catch((error) => {
+                        console.log(error);
+                    });
+            }
+            else {
+                window.location.href = 'index.html';
+            }
+        });
+
+
+        // background color toggle
+        const bgChanger = document.getElementById('bgChanger');
+        const elementsToToggle = document.querySelectorAll('body, label, input, a');
+        let darkMode = localStorage.getItem('darkMode')
+
+
+        const enableDark = () => {
+            elementsToToggle.forEach(elements => {
+                elements.classList.add('dark-mode')
+                elements.classList.remove('light-mode')
+            });
+            localStorage.setItem('darkMode', 'enabled')
+        }
+        window.enableDark = enableDark
+        const disableDark = () => {
+            elementsToToggle.forEach(elements => {
+                elements.classList.add('light-mode')
+                elements.classList.remove('dark-mode')
+            });
+            localStorage.setItem('darkMode', 'disabled')
+        }
+        window.disableDark = disableDark
+
+        if (darkMode == 'enabled') {
+            enableDark()
+            document.getElementById('light').style = "display:block;"
+            document.getElementById('dark').style = "display:none;"
+            document.getElementById('searchBtn').style="background-color: #555252;background-image: url(img/search-light-mode.svg);"
+            document.getElementById('displayHbg').style="background-image: url(img/hamburger-menu-light-mode.svg);"
+            document.getElementById('hideHbg').style=" background-image: url(img/cancel-close-delete-light-mode.svg);"
+        } else {
+            disableDark()
+            document.getElementById('light').style = "display:none;"
+            document.getElementById('dark').style = "display:block;"
+            document.getElementById('searchBtn').style="background-color: #f3f1f1; background-image: url(img/search-alt-svgrepo-com.svg);"
+            document.getElementById('displayHbg').style="background-image: url(img/hamburger-menu-svgrepo-com.svg);"
+            document.getElementById('hideHbg').style=" background-image: url(img/cancel-close-delete-svgrepo-com.svg);"
+
+        }
+
+        bgChanger.addEventListener('click', () => {
+            darkMode = localStorage.getItem('darkMode')
+            if (darkMode == 'enabled') {
+                disableDark()
+                document.getElementById('light').style = "display:none;"
+                document.getElementById('dark').style = "display:block;"
+            document.getElementById('searchBtn').style="background-color: #f3f1f1; background-image: url(img/search-alt-svgrepo-com.svg);"
+            document.getElementById('displayHbg').style="background-image: url(img/hamburger-menu-svgrepo-com.svg);"
+            document.getElementById('hideHbg').style=" background-image: url(img/cancel-close-delete-svgrepo-com.svg);"
+            
+        } else {
+                enableDark()
+                document.getElementById('light').style = "display:block;"
+                document.getElementById('dark').style = "display:none;"
+                document.getElementById('searchBtn').style="background-color: #555252;background-image: url(img/search-light-mode.svg);"
+                document.getElementById('displayHbg').style="background-image: url(img/hamburger-menu-light-mode.svg);"
+            document.getElementById('hideHbg').style=" background-image: url(img/cancel-close-delete-light-mode.svg);"
+
+            }
+        })
+
+        document.getElementById('signOuted').addEventListener('click', () => {
+            let comfirmed = confirm('are sure you want to sign out')
+            if (comfirmed == true) {
+                signOut(auth)
+                    .then(() => {
+                        console.log('User signed out');
+                        window.location.href = 'index.html'
+                    })
+                    .catch((error) => {
+                        console.error('Error signing out:', error);
+                    });
+            }
+
+            else {
+                comfirmed = false
+            }
+
+        });
+        let searchBtn = document.getElementById('searchBtn')
+        let searchInput = document.getElementById('searchInput')
+        let searchBar = document.getElementById('searchBar')
+        
+        searchBtn.addEventListener('focus', () => {
+            searchInput.classList.add('searchInputSm')
+            searchBtn.style=""
+            searchInput.focus()
+            utiCon.classList.add('utiConSm')
+            searchBar.style =""
+            darkMode = localStorage.getItem('darkMode')
+            if(darkMode == 'enabled'){
+                searchBtn.classList.add('buttonSm_N')
+                searchBar.classList.add('searchBarSm_N')
+                bgChanger.classList.add('dashBgSm')
+                cancelCon.classList.add('cancelConSm')
+                cancelBtn.style.display="block"
+                localStorage.setItem('darkMode', 'enabled')
+            }else{
+                searchBtn.classList.add('buttonSm_L')
+                searchBar.classList.add('searchBarSm_L')
+                cancelCon.classList.add('cancelConSm')
+                cancelBtn.style.display="block"
+                bgChanger.classList.add('dashBgSm')
+                localStorage.setItem('darkMode', 'disabled')
+            }
+        })
+        searchInput.addEventListener('blur', () => {
+            
+            cancelCon.classList.remove('cancelConSm')
+            cancelBtn.style.display=""
+            searchInput.value=""
+            searchInput.classList.remove('searchInputSm')
+            searchBtn.classList.remove('buttonSm_N')
+            searchBtn.classList.remove('buttonSm_L')
+            searchBar.classList.remove('searchBarSm_N')
+            searchBar.classList.remove('searchBarSm_L')
+            bgChanger.classList.remove('dashBgSm')
+            utiCon.classList.remove('utiConSm')
+            searchInput.style=""
+            darkMode = localStorage.getItem('darkMode')
+            if(darkMode == 'enabled'){
+                searchBar.style = "transition: 0ms;"
+                localStorage.setItem('darkMode', 'enabled')
+                document.getElementById('searchBtn').style="background-color: #555252;background-image: url(img/search-light-mode.svg);"
+            }else{
+                searchBar.style = " transition: 0ms;"
+                localStorage.setItem('darkMode', 'disabled')
+            document.getElementById('searchBtn').style="background-color: #f3f1f1; background-image: url(img/search-alt-svgrepo-com.svg);"
+            }
+        })
+
+        let displayHbg = document.getElementById('displayHbg')
+        let hideHbg = document.getElementById('hideHbg')
+        let hbgToggle = document.getElementById('hbgToggle')
+        let sideBar = document.getElementById('sideBar')
+        displayHbg.style.display="block"
+        // sideBar.style.display="none"
+        hbgToggle.addEventListener('click', ()=>{
+            if(displayHbg.style.display==="block"){
+                hideHbg.style.display="block"
+                displayHbg.style.display="none"
+                
+                sideBar.classList.add('sideBarHide')
+            }
+            else{
+                displayHbg.style.display="block"
+                hideHbg.style.display="none"
+                sideBar.classList.remove('sideBarHide')
+                sideBar.classList.add('sideBarShow')
+                
+            }
+        })
+
+        // const cancelBtn = ()=>{
+        //     searchInput.value=""
+        //     console.log('this just click on');
+            
+        // }
+        // displayHbg.addEventListener('focus', ()=>{
+        //     darkMode = localStorage.getItem('darkMode')
+            
+        // if (darkMode=='disabled') {
+        //     displayHbg.style="background-image: url(img/hamburger-svgrepo-com.svg);"
+        //         hideHbg.style="background-image: url(img/cancel-close-delete-svgrepo-com.svg);"
+        //     }
+        //     else{
+                
+                
+        //     }
+        // })
     </script>
 </body>
 
