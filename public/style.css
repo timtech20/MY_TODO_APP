@@ -6,7 +6,7 @@
 }
 
 #signUpForm {
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }
@@ -39,21 +39,20 @@ form {
 
 
 
-.signUpBtn,
-.signInBtn {
+.signUp_In {
     background-color: #ee5e20;
     color: whitesmoke;
     border: none;
     height: 40px;
 }
-
-.signUpBtn:active,
-.signInBtn:active {
-    background-color: #ee5e20e1;
-    color: whitesmoke;
-    border: none;
+.active {
     scale: 0.9;
 }
+
+
+/* .signUpBtn:active,
+.signInBtn:active {
+} */
 
 input {
     outline: none;
@@ -119,6 +118,7 @@ label {
     background-repeat: no-repeat;
     background-size: 80%;
     display: none;
+    transition: 1s;
 }
 
 #dark {
@@ -128,14 +128,19 @@ label {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 80%;
+    transition: 1s;
 }
 
 .dashBg {
     width: 40px;
     height: 40px;
+    border-radius: 50%;
     z-index: 99;
-    position: absolute;
-    left: 95%;
+    position: fixed;
+    right: 20px;
+}
+#dark:hover, #light:hover {
+    transform: rotate(360deg);
 }
 
 
@@ -159,6 +164,9 @@ a.light-mode {
 
 }
 
+li{
+    list-style: none;
+}
 
 body.dark-mode,
 label.dark-mode {
@@ -224,13 +232,7 @@ a.dark-mode {
     font-style: italic;
 }
 
-.socialBtnG:active,
-.socialBtnF:active,
-.socialBtnX:active {
-    box-shadow: none;
-    scale: 0, 7;
 
-}
 
 .socialBtnG,
 .socialBtnF,
@@ -246,6 +248,11 @@ a.dark-mode {
     background-size: 60%;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.socialActive {
+    box-shadow: none;
+    scale: 0, 7;
 }
 
 .socialBtnF {
@@ -277,7 +284,7 @@ a.dark-mode {
     font-style: italic;
 }
 
-#con {
+#con{
     transition: 1s;
     width: 100%;
     height: 100vh;
@@ -289,6 +296,21 @@ a.dark-mode {
     position: absolute;
     top: 0px;
     display: none;
+    z-index: 19999;
+}
+#loaderCon {
+    transition: 1s;
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    place-content: center;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background-color: rgba(42, 44, 48, 0.452);
+    position: absolute;
+    top: 0px;
+    display: none;
+    z-index: 19999;
 }
 
 #house {
@@ -418,7 +440,7 @@ a.dark-mode {
     background-repeat: no-repeat;
     background-size: 80%;
     background-position: center;
-
+    cursor:context-menu ;
 }
 
 .buttonSm_L {
@@ -429,7 +451,8 @@ a.dark-mode {
     background-repeat: no-repeat;
     background-position: center;
     overflow: hidden;
-
+    cursor:context-menu ;
+    /* cursor: ; */
 }
 
 .buttonSm_N {
@@ -440,7 +463,7 @@ a.dark-mode {
     background-repeat: no-repeat;
     background-position: center;
     overflow: hidden;
-
+/* background-color: antiquewhite; */
 }
 
 .cancelCon {
@@ -453,6 +476,7 @@ a.dark-mode {
     /* margin-left: 200px; */
     overflow: hidden;
     transition: 400ms;
+    gap: 10px;
 }
 
 .cancelConSm {
@@ -463,6 +487,7 @@ a.dark-mode {
     justify-content: left;
     height: 100%;
     /* margin-left: 200px; */
+    cursor: pointer;
 }
 
 .cancelBtn {
@@ -506,24 +531,425 @@ a.dark-mode {
     /* font-size: 2em; */
     /* height: 100%; */
 }
+.hbIcon input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .hbIcon {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+  }
+  
+  .checkmark {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 1.3em;
+    width: 1.3em;
+  }
+  
+  .checkmark span {
+    width: 36px;
+    height: 3px;
+    background-color: black;
+    position: absolute;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    border-radius: 50px;
+  }
+  
+  .checkmark span:nth-child(1) {
+    top: 10%;
+  }
+  
+  .checkmark span:nth-child(2) {
+    top: 50%;
+  }
+  
+  .checkmark span:nth-child(3) {
+    top: 90%;
+  }
+  
+  .hbIcon input:checked + .checkmark span:nth-child(1) {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    -webkit-transform: translateY(-50%) rotate(45deg);
+    -moz-transform: translateY(-50%) rotate(45deg);
+    -ms-transform: translateY(-50%) rotate(45deg);
+    -o-transform: translateY(-50%) rotate(45deg);
+  }
+  
+  .hbIcon input:checked + .checkmark span:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+    -webkit-transform: translateY(-50%) rotate(-45deg);
+    -moz-transform: translateY(-50%) rotate(-45deg);
+    -ms-transform: translateY(-50%) rotate(-45deg);
+    -o-transform: translateY(-50%) rotate(-45deg);
+  }
+  
+  .hbIcon input:checked + .checkmark span:nth-child(3) {
+    transform: translateX(-50px);
+    -webkit-transform: translateX(-50px);
+    -moz-transform: translateX(-50px);
+    -ms-transform: translateX(-50px);
+    -o-transform: translateX(-50px);
+    opacity: 0;
+  }
 
-@media screen and (max-width: 570px) {
+
+  .sideBar{
+    position: fixed;
+    backdrop-filter: blur(70px) saturate(180%);
+    -webkit-backdrop-filter: blur(70px) saturate(180%);
+    background-color: rgba(80, 82, 87, 0.26);
+    width: 300px;
+    height: 80%;
+    top: 70px;
+    left:-300px;
+    transition: 0.3s;
+}
+
+.btnSmall{
+    width: 80%;
+    height: 80%;
+    background-color: #0d0d0d;
+    border-radius: 50%;
+    border: 0px;
+    color: white;
+    text-align: center;
+    z-index: 22;
+    
+}
+
+.btnSmallDiv{
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+.btnDesign{
+    background-color: #636060;
+    width: 100%;
+    height: 100%;
+    /* z-index: 999; */
+}
+
+.btnAddDiv{
+    position: fixed;
+    bottom: 20px;
+    width: 60px;
+    height: 60px;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    /* border-bottom:3px solid ; */
+    background-color:  white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .btnAddDiv::before{
+    content: "";
+    width: 80px;
+    height: 80px;
+    background-color: white;
+    z-index: 9;
+    position: fixed;
+b                   order-radius: 50%;
+    /* border-bottom-right-radius: 80%;
+    border-bottom-left-radius: 80%; */
+    /* bottom: 10px; */
+
+/* }  */
+
+
+.checkbox-wrapper *,
+  .checkbox-wrapper *::before,
+  .checkbox-wrapper *::after {
+  box-sizing: border-box;
+}
+
+.checkbox-wrapper .checkbox-container {
+  display: block;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.checkbox-wrapper input {
+  visibility: hidden;
+  display: none;
+}
+
+.checkbox-wrapper input:checked ~ .checkbox {
+  transform: rotate(45deg);
+  width: 14px;
+  
+  border-color: green;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-radius: 0;
+}
+
+.checkbox-wrapper .checkbox {
+  display: block;
+  width: inherit;
+  height: inherit;
+  border: 4px solid green;
+  border-radius: 6px;
+  transition: all 0.375s;
+}
+
+/* From Uiverse.io by aaronross1 */ 
+.edit-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgb(20, 20, 20);
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none !important;
+}
+
+.edit-svgIcon {
+  width: 17px;
+  transition-duration: 0.3s;
+}
+
+.edit-svgIcon path {
+  fill: white;
+}
+
+.editBtnDone {
+  width: 120px;
+  border-radius: 50px;
+  transition-duration: 0.3s;
+  background-color: rgb(113, 212, 67);
+  align-items: center;
+}
+
+.edit-button:hover .edit-svgIcon {
+  width: 20px;
+  transition-duration: 0.3s;
+  transform: translateY(60%);
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+
+
+.editBtnDone::before {
+    content: "Edited";
+    color: white;
+    font-size: 2px;
+  display: block;
+  padding-right: 10px;
+  font-size: 13px;
+  opacity: 1;
+  transform: translateY(0px);
+  transition-duration: 0.3s;
+}
+
+/* From Uiverse.io by aaronross1 */ 
+.delete-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgb(20, 20, 20);
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .delete-svgIcon {
+    width: 15px;
+    transition-duration: 0.3s;
+  }
+  
+  .delete-svgIcon path {
+    fill: white;
+  }
+  
+  .deleteBtnDone {
+    width: 120px;
+    border-radius: 50px;
+    transition-duration: 0.3s;
+    background-color: rgb(255, 69, 69);
+    align-items: center;
+  }
+  
+  .delete-button:hover .delete-svgIcon {
+    width: 20px;
+    transition-duration: 0.3s;
+    transform: translateY(60%);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+  
+  
+  .deleteBtnDone::before {
+    content: "Deleted";
+    font-size: 2px;
+    color: white;
+    display: block;
+    padding-right: 10px;
+    font-size: 13px;
+    opacity: 1;
+    transform: translateY(0px);
+    transition-duration: 0.3s;
+  }
+
+  section{
+      /* overflow: hidden; */
+      padding-bottom: 80px;
+  }
+
+  .todoLgBtn{
+    position: fixed;
+    right: 50px;
+    top: 50%;
+  }
+
+  .showAllTodo{
+    width: 50%;
+    height: 100%;
+    gap: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    /* overflow-y: scroll; */
+  }
+
+  .allTodoCon{
+    width: 100%;
+    height: auto;
+    /* background: #000; */
+  }
+
+  .titelCon{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background: #b1aeae;
+    padding: 0px 10px;
+    border-bottom:1px solid #0d0d0d;
+  }
+  .edDeBtn{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 20%;
+    height: 100%;
+    background: transparent;
+}
+
+.jobTitle{
+    display: flex;
+    /* justify-content: start; */
+    align-items: center;
+    width: 40%;
+    height: 100%;
+    /* background: #000; */
+    gap: 10px;
+    
+}
+.timeBtnCon{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 35%;
+    height: 100%;
+}
+
+.titleDiv{
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    /* background-color: white; */
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.titleDiv div{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* background-color: tomato; */
+}
+
+.descripDiv{
+    width: 100%;
+    height: 30px ;
+    background: #b1aeae;
+    padding: 0px 10px;
+    text-wrap:wrap;
+    overflow: hidden;
+
+
+}
+
+.descripDiv div{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    word-break:break-all;
+
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
+
+@media screen and (max-width: 870px) {
     form {
         padding: 0px 30px;
         margin-top: 50px;
     }
 
-    .socialBtnG:active,
-    .socialBtnF:active,
-    .socialBtnX:active,
-    .socialBtnG:hover,
-    .socialBtnF:hover,
-    .socialBtnX:hover {
-        box-shadow: none;
-        scale: 0, 9;
-
-    }
-
+    
+    
     .socialBtnG,
     .socialBtnF,
     .socialBtnX {
@@ -543,6 +969,12 @@ a.dark-mode {
 
     .socialBtnX {
         background-image: url(img/svgexport-1.svg);
+    }
+
+    .socialActive {
+        box-shadow: none;
+        scale: 0, 7;
+
     }
 
     .logText h1 {
@@ -567,16 +999,9 @@ a.dark-mode {
         width: 20%;
     }
 
-    .signUpBtn:hover,
-    .signInBtn:hover {
-        background-color: #ee5e20e1;
-        color: whitesmoke;
-        border: none;
-        scale: 0.9;
-    }
 
     .navBar {
-        height: 60px;
+        height: 70px;
         padding: 0px 10px;
     }
 
@@ -586,7 +1011,7 @@ a.dark-mode {
         width: 40%;
         /* margin-left: 10px; */
         /* background-color: #ee5e20; */
-        gap: 5px;
+        gap: 30px;
         justify-content: start;
         align-items: center;
     }
@@ -599,7 +1024,8 @@ a.dark-mode {
     .searchBar {
         margin: 0;
         width: 45px;
-    height: 45px;
+        height: 45px;
+        /* background-color: #ee5e20; */
     }
 
     .searchBarSm_N {
@@ -639,19 +1065,19 @@ a.dark-mode {
         justify-content: end;
         align-items: center;
         width: 100%;
-    
+    /* background-color: #ee7220f5; */
     }
 
 
     .buttonSm {
         width: 10%;
         height: 80%;
-
+        background:  black;
     }
 
     .cancelCon {
-        /* background-color: #ee5e20; */
-        width: 15%;
+        /* background-color: #dd9d82; */
+        width: 16%;
         gap: 5px;
         /* margin-left: 200px; */
         transition: 100ms;
@@ -667,110 +1093,60 @@ a.dark-mode {
         /* margin-left: 200px; */
     }
 
-    .hbgToggle {
-        height: 100%;
-        width: 35%;
-        /* background-color: aliceblue; */
-    }
 
     .logo {
         /* background-color: aliceblue; */
         width: auto;
-        font-weight: 700;
-        font-size: 1.3em;
+        font-weight: 600;
+        font-size: 1.6em;
         height: auto;
         letter-spacing: 1px;
     }
 
-    #displayHbg {
-        height: 100%;
-        width: 100%;
-        background-position: 0px center;
-        background-repeat: no-repeat;
-        background-size: 100%;
-        display: block;
-    }
+   
 
-    #hideHbg {
-        transition: 4s;
-        height: 100%;
-        width: 100%;
-        background-position: 0px center;
-        background-repeat: no-repeat;
-        background-size: 100% 150%;
-        display: none;
-    }
 
-    .sideBar {
-        display: none;
-    }
 
-    .sideBarShow {
-        position: fixed;
-        backdrop-filter: blur(70px) saturate(180%);
-        -webkit-backdrop-filter: blur(70px) saturate(180%);
-        background-color: rgba(80, 82, 87, 0.26);
-        top: 60px;
-        z-index: 100;
-        animation: sideBar 400ms ease-in-out;
-        width: 0px;
-        height: 80%;
-        overflow-x: scroll;
-        scrollbar-width: none;
-    }
 
-    .sideBarHide {
-        position: fixed;
-        /* position: absolute; */
-        backdrop-filter: blur(70px) saturate(180%);
-        -webkit-backdrop-filter: blur(70px) saturate(180%);
-        background-color: rgba(80, 82, 87, 0.26);
-        top: 60px;
-        z-index: 100;
-        animation: sideBarHide 400ms ease-in-out;
-        width: 70%;
-        height: 80%;
-        overflow-x: scroll;
-        scrollbar-width: none;
-        border-bottom-right-radius: 8px;
-    }
+
 
     .dashBg {
         width: 40px;
         height: 40px;
         z-index: 99;
         position: static;
+        /* background-color: aliceblue; */
     }
 
     .dashBgSm {
         display: none;
     }
-
+    
     .ulConSb {
         width: 100%;
         overflow: hidden;
     }
-
-    @keyframes sideBar {
-        0% {
-            width: 70%;
-            /* display: block; */
-        }
-
-        100% {
-            width: 0px;
-            display: none;
-        }
+    section{
+        padding: 0px 30px;
+        padding-bottom: 150px;
+        /* margin-bottom: 150px; */
+        
     }
-
-    @keyframes sideBarHide {
-        0% {
-            width: 0px;
-        }
-
-        100% {
-            width: 70%;
-            /* display: none; */
-        }
+    
+    .showAllTodo{
+        width: 100%;
+        height: 100%;
+        gap: 20px;
+        /* overflow-y: scroll; */
+      }
+      
+    .edDeBtn{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 35%;
+        height: 100%;
+        background: transparent;
     }
+    
 }

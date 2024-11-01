@@ -48,7 +48,7 @@
       </div>
       <div id="passwordError" ></div>
     </div>
-    <button onclick="signIn()" type="button" class="signInBtn rounded-pill">Sign in</button>
+    <button onclick="signIn()" type="button" class="signUp_In rounded-pill">Sign in</button>
     <div id="forgetPass">Forgot the password?</div>
   </div>
 
@@ -135,7 +135,7 @@
       </div>
       <div id="comPasswordUpError"></div>
     </div>
-    <button onclick="signUpp()" type="button" class="signUpBtn rounded-pill" >Sign Up</button>
+    <button onclick="signUpp()" type="button" class="signUp_In rounded-pill" >Sign Up</button>
       </div>
       
 
@@ -179,8 +179,54 @@
   
   <script defer src="script.js" type="module"></script>
   <script>
-
-
+    window.onload = () =>{
+      userReload = localStorage.getItem('userReload')
+      if(userReload === 'signUp'){
+      document.getElementById("logForm").style = "display:none;"
+      document.getElementById("signUpForm").style = "display:flex;"
+      document.getElementById('con').style = "display:grid;"
+      setTimeout(() => {
+      document.getElementById('con').style = "display:none;"
+      }, 4000);
+    }else{
+      document.getElementById("logForm").style = "display:flex;"
+      document.getElementById("signUpForm").style = "display:none;"
+      document.getElementById('con').style = "display:grid;"
+      setTimeout(() => {
+      document.getElementById('con').style = "display:none;"
+      }, 4000);
+    }
+  }
+  const buttons = document.querySelectorAll('.signUp_In')
+  buttons.forEach(function(button){
+    button.addEventListener('touchstart', function(){
+      button.classList.add('active')
+    })
+    button.addEventListener('touchend', function(){
+      button.classList.remove('active')
+    })
+    button.addEventListener('mousedown', function(){
+      button.classList.add('active')
+    })
+    button.addEventListener('mouseup', function(){
+      button.classList.remove('active')
+    })
+  })
+  const socialBtn = document.querySelectorAll('.socialBtnX, .socialBtnG, .socialBtnF')
+  socialBtn.forEach(function(buttons){
+    buttons.addEventListener('touchstart', function(){
+      buttons.classList.add('socialActive')
+    })
+    buttons.addEventListener('touchend', function(){
+      buttons.classList.remove('socialActive')
+    })
+    buttons.addEventListener('mousedown', function(){
+      buttons.classList.add('socialActive')
+    })
+    buttons.addEventListener('mouseup', function(){
+      buttons.classList.remove('socialActive')
+    })
+  })
     const showPassBtnLog = () =>{
       let password = document.getElementById('password')
       if (password.type == "password") {
@@ -235,16 +281,7 @@
       localStorage.setItem('userReload', 'signIn')
     }
 
-    window.onload = () =>{
-      userReload = localStorage.getItem('userReload')
-      if(userReload === 'signUp'){
-      document.getElementById("logForm").style = "display:none;"
-      document.getElementById("signUpForm").style = "display:flex;"
-    }else{
-      document.getElementById("logForm").style = "display:flex;"
-      document.getElementById("signUpForm").style = "display:none;"
-    }
-  }
+
   
             // background color toggle
 
@@ -324,42 +361,22 @@ document.getElementById('email').addEventListener('focus', () => {
   LogInput.classList.remove('inputB')
   document.getElementById('throwError').innerHTML = ''
 })
-document.getElementById('email').addEventListener('input', () => {
-  document.getElementById("emailError").innerHTML = ""
-  LogInput.classList.remove('inputB')
-  document.getElementById('throwError').innerHTML = ''
-})
-document.getElementById('password').addEventListener('input', () => {
-  document.getElementById("passwordError").innerHTML = ""
-  LogInput2.classList.remove('inputB')
-  document.getElementById('throwError').innerHTML = ''
-})
+// document.getElementById('email').addEventListener('input', () => {
+//   document.getElementById("emailError").innerHTML = ""
+//   LogInput.classList.remove('inputB')
+//   document.getElementById('throwError').innerHTML = ''
+// })
+// document.getElementById('password').addEventListener('input', () => {
+//   document.getElementById("passwordError").innerHTML = ""
+//   LogInput2.classList.remove('inputB')
+//   document.getElementById('throwError').innerHTML = ''
+// })
 
 const inputGroup = document.getElementById('inputGroup')
 const inputGroup2 = document.getElementById('inputGroup2')
 const inputGroup3 = document.getElementById('inputGroup3')
 const inputGroup4 = document.getElementById('inputGroup4')
 const inputGroup5 = document.getElementById('inputGroup5')
-document.getElementById('firstName').addEventListener('input', () => {
-  inputGroup.classList.remove('inputB')
-  document.getElementById("firstNameError").innerHTML = "";
-});
-document.getElementById('lastName').addEventListener('input', () => {
-  inputGroup2.classList.remove('inputB2')
-  document.getElementById("lastNameError").innerHTML = "";
-});
-document.getElementById('emailUp').addEventListener('input', () => {
-  inputGroup3.classList.remove('inputB3')
-  document.getElementById("emailUpError").innerHTML = "";
-});
-document.getElementById('passwordUp').addEventListener('input', () => {
-  inputGroup4.classList.remove('inputB4')
-  document.getElementById("passwordUpError").innerHTML = "";
-});
-document.getElementById('comPasswordUp').addEventListener('input', () => {
-  inputGroup5.classList.remove('inputB5')
-  document.getElementById("comPasswordUpError").innerHTML = "";
-});
 document.getElementById('firstName').addEventListener('blur', () => {
   if (document.getElementById('firstName').value.trim() === "") {
     inputGroup.classList.add('inputB')

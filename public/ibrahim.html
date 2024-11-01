@@ -86,6 +86,11 @@
             padding: 5px 10px;
             border-radius: 4px;
         }
+        .test{
+            width: 100px;
+            height: 100px;
+            overflow-y: scroll;
+        }
         
     </style>
 </head>
@@ -114,9 +119,14 @@
         </div>
     </nav>
     
-</body>
+    <div class="test">
+        <div id="card">
+           
+            </div>
 
-</html>
+    </div>
+    <input type="text" id="testIn">
+    <button onclick="add()">Add to Cart</button>
 
 <script>
     // let num = 1
@@ -144,9 +154,13 @@
     //     }
     // }
 
-    document.querySelector('.search-button').addEventListener('click', function() {
-    const searchInput = document.querySelector('.search-input');
-    searchInput.classList.toggle('active-search-input');
-});
+    const add = () => {
+        let testIn = document.getElementById('testIn').value 
+        card.innerHTML = testIn
+
+    }
 
 </script>
+</body>
+
+</html>

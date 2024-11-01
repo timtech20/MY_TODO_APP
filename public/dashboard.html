@@ -1,398 +1,1176 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>tod list</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
-    <nav class="navBar">
-        <div class="utiCon" id="utiCon">
-            <div id="hbgToggle" class="hbgToggle d-md-none d-ms-block">
-                <div id="displayHbg"></div>
-                <div id="hideHbg"></div>
-                </div>
-        <div id="logo" class="logo">TODO</div>
-        <div class="ulCon d-none d-lg-flex d-md-flex ">
-            <li class="">
-                <a class="" href="#">Home</a>
-            </li>
-            <li class="">
-                <!-- <a class="" href="">All Todo</a> -->
-            </li>
-            <!-- <li class=" dropdown"> -->
-                <div class="dropDD nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false" id="pfpDisplay">
-                    header
-                </div>
-                <ul class="dropdown-menu ">
-                    <li>
-                        <div class="dropdown-item" id="userName"></div>
-                    </li>
-                    <li>
-                        <div class="dropdown-item" id="userEmail"></div>
-                    </li>
-                    <li><button class="" id="signOuted">Log Out</button></li>
-                </ul>
-            <!-- </li> -->
-            <li class=" dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Task List
-                </a>
-                <ul class="dropdown-menu ">
-                    <li><a class="dropdown-item" href="">Scheduled</a></li>
-                    <li><a class="dropdown-item" href="">Completed</a></li>
-                    <li><a class="dropdown-item" href="">today</a></li>
-                </ul>
-            </li>
+  <body>
+    <div id="loaderCon">
+      <div id="house">
+        <div id="rotate">
+          <div class="spaned1"></div>
+          <div class="spaned1"></div>
+          <div class="spaned1"></div>
+          <div class="spaned1"></div>
         </div>
-        </div>
-        
-        <div id="conForSearch_bgChanger" class="conForSearch_bgChanger">
-            <div id="cancelCon" class="cancelCon">
-        <div class="searchBar" tabindex="0" id="searchBar" >            
-        <input type="search" placeholder="Search" id="searchInput" class="searchInput" autocomplete="off">
-            <button type="button" id="searchBtn" class="searchBtn"></button>
-        </div>
-        <span onclick="cancelBtn" id="cancelBtn" class="cancelBtn">Cancel</span>
+      </div>
     </div>
+
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete this? There is no undoing this
+            action.
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="saveDelete()"
+            >
+              Okay, Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+              Enter Todo
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <input type="text" id="titleInput" placeholder="Title" autofocus />
+            <textarea id="textInput" cols=""></textarea>
+            <!-- <label for="dateInput">Choose Date:</label> -->
+            <input type="date" min="" id="dateInput" />
+            <!-- <label for="timeInput">Choose Time:</label> -->
+            <input type="time" id="timeInput" />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" onclick="subTodo()" class="btn btn-primary">
+              Done
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="staticBackdrop2"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+              Enter Todo
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <input
+              type="text"
+              id="titleInputEd"
+              placeholder="Title"
+              autofocus
+            />
+            <textarea name="" id="textInputEd" cols=""></textarea>
+            <label for="dateInputEd">Choose Date:</label>
+            <input type="date" min="" id="dateInputEd" />
+            <label for="timeInput">Choose Time:</label>
+            <input type="time" id="timeInputEd" />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" onclick="subTodoEd()" class="btn btn-primary">
+              Done
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navBar">
+      <div class="utiCon" id="utiCon">
+        <div class="allUtiCon d-lg-none d-md-block">
+          <div class="hbIcon" id="hbIcon">
+            <input type="checkbox" id="hbToggle" />
+            <div class="checkmark">
+              <span class="hbBg"></span>
+              <span class="hbBg"></span>
+              <span class="hbBg"></span>
+            </div>
+          </div>
+        </div>
+        <div id="logo" class="logo">TODO</div>
+        <div class="ulCon d-none d-lg-flex d-md-none">
+          <li class="">
+            <a class="" href="#">Home</a>
+          </li>
+          <li class="">
+            <!-- <a class="" href="">All Todo</a> -->
+          </li>
+          <!-- <li class=" dropdown"> -->
+          <div
+            class="dropDD nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            id="pfpDisplay"
+          >
+            header
+          </div>
+          <ul class="dropdown-menu">
+            <li>
+              <div class="dropdown-item" id="userName"></div>
+            </li>
+            <li>
+              <div class="dropdown-item" id="userEmail"></div>
+            </li>
+            <li><button class="" id="signOuted">Log Out</button></li>
+          </ul>
+          <!-- </li> -->
+          <li class="dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Task List
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="">Scheduled</a></li>
+              <li><a class="dropdown-item" href="">Completed</a></li>
+              <li><a class="dropdown-item" href="">today</a></li>
+            </ul>
+          </li>
+        </div>
+      </div>
+
+      <div id="conForSearch_bgChanger" class="conForSearch_bgChanger">
+        <div id="cancelCon" class="cancelCon">
+          <div class="searchBar" tabindex="0" id="searchBar">
+            <input
+              type="search"
+              placeholder="Search"
+              id="searchInput"
+              class="searchInput"
+              autocomplete="off"
+            />
+            <button type="button" id="searchBtn" class="searchBtn"></button>
+          </div>
+          <span
+            onclick="cancelBtn"
+            id="cancelBtn"
+            class="cancelBtn"
+            style="cursor: pointer"
+            >Cancel</span
+          >
+        </div>
         <div id="bgChanger" class="dashBg">
-            <div id="light"></div>
-            <div id="dark"></div>
+          <div id="light"></div>
+          <div id="dark"></div>
         </div>
-        </div>
+      </div>
     </nav>
 
-    <section class="alltodo ">
-        <div id="showAllTodo "></div>
-        <div id="sideBar" class="sideBar d-lg-none d-md-none">
-            <div class="ulConSb">
-                <li class="">
-                    <a class="" href="#">Home</a>
-                </li>
-                <li class="">
-                    <!-- <a class="" href="">All Todo</a> -->
-                </li>
-                <!-- <li class=" dropdown"> -->
-                    <div class="dropDD"  id="pfpDisplaySm">
-                        header
-                    </div>
-                    <ul class="">
-                        <li>
-                            <div class="" id="userNameSm"></div>
-                        </li>
-                        <li>
-                            <div class="" id="userEmailSm"></div>
-                        </li>
-                        <li><button class="" id="signOutedSm">Log Out</button></li>
-                    </ul>
-                <!-- </li> -->
-                <div class="smDropDown">
-                    dro
-                    <ul class=" ">
-                        <li><a class="" href="">Scheduled</a></li>
-                        <li><a class="" href="">Completed</a></li>
-                        <li><a class="" href="">today</a></li>
-                    </ul>
-                </div>
-            </div>
+    <section class="alltodo">
+      <div id="taskNum"></div>
+      <div id="showAllTodo" class="showAllTodo">
+        
+      </div>
+      <div id="sideBar" class="sideBar">
+        <div class="ulConSb">
+          <li class="">
+            <a class="" href="#">Home</a>
+          </li>
+          <li class="">
+            <!-- <a class="" href="">All Todo</a> -->
+          </li>
+          <!-- <li class=" dropdown"> -->
+          <div class="dropDD" id="pfpDisplaySm">header</div>
+          <ul class="">
+            <li>
+              <div class="" id="userNameSm"></div>
+            </li>
+            <li>
+              <div class="" id="userEmailSm"></div>
+            </li>
+            <li><button class="" id="signOutedSm">Log Out</button></li>
+          </ul>
+          <!-- </li> -->
+          <div class="smDropDown">
+            dro
+            <ul class=" ">
+              <li><a class="" href="">Scheduled</a></li>
+              <li><a class="" href="">Completed</a></li>
+              <li><a class="" href="">today</a></li>
+            </ul>
+          </div>
         </div>
-        <!-- Button trigger modal -->
-        <!-- <div id="smScreen" class=" d-lg-none d-block"> -->
-
-        <!-- Modal -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered ">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Enter Todo</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="text" placeholder="Title">
-                        <textarea name="tyg" id="" cols="50"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Done</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Button trigger modal -->
-        <button type="button" class=" btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            add Todo
+      </div>
+      <div class="brnBigDiv d-none d-lg-flex">
+        <button
+          type="button"
+          class="todoLgBtn"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >
+          add Todo
         </button>
-        <!-- </div> -->
+      </div>
+      <div class="btnSmallDiv d-lg-none">
+        <div class="btnAddDiv">
+          <button
+            type="button"
+            class="btnSmall"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            <i class="pluser fa-solid fa-plus"></i>
+          </button>
+        </div>
+        <div class="btnDesign"></div>
+      </div>
 
-        <button onclick="addTodo()"></button>
+      <!-- </div> -->
+
+      <!-- <button onclick="deleteTodo()">deleteTodo</button> -->
     </section>
 
     <script defer src="script.js" type="module"></script>
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
-        import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+      import {
+        getAuth,
+        onAuthStateChanged,
+        signOut,
+      } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+      import {
+        getDatabase,
+        ref,
+        set,
+        get,
+        push,
+        onValue,
+      } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+      const firebaseConfig = {
+        apiKey: "AIzaSyCoYc2Uqe0rywPdzOhJytjMpCOXHJQhDiI",
+        authDomain: "mytodoapp-5e8a8.firebaseapp.com",
+        databaseURL: "https://mytodoapp-5e8a8-default-rtdb.firebaseio.com",
+        projectId: "mytodoapp-5e8a8",
+        storageBucket: "mytodoapp-5e8a8.appspot.com",
+        messagingSenderId: "810814520509",
+        appId: "1:810814520509:web:3e9ac758a37e3583178bd4",
+      };
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const database = getDatabase(app);
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyCoYc2Uqe0rywPdzOhJytjMpCOXHJQhDiI",
-            authDomain: "mytodoapp-5e8a8.firebaseapp.com",
-            databaseURL: "https://mytodoapp-5e8a8-default-rtdb.firebaseio.com",
-            projectId: "mytodoapp-5e8a8",
-            storageBucket: "mytodoapp-5e8a8.appspot.com",
-            messagingSenderId: "810814520509",
-            appId: "1:810814520509:web:3e9ac758a37e3583178bd4"
-        };
+      window.addEventListener("load", () => {
+        document.getElementById("loaderCon").style = "display:grid;";
+      });
 
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          let today = new Date().toISOString().slice(0, 10); // Format today's date as YYYY-MM-DD
+          document.getElementById("dateInput").setAttribute("min", today);
 
+          const userId = user.uid;
+          const dbRef = ref(database, `user_signUp_Info/${userId}`);
+          get(dbRef)
+            .then((snapshot) => {
+              document.getElementById("loaderCon").style = "display:grid;";
+              let personName =
+                user.displayName ||
+                `${snapshot.val().firstName} ${snapshot.val().lastName}`;
+              let email = user.email;
+              let pic = user.photoURL;
+              userName.innerHTML = `Welcome ${personName}</h3>`;
+              userEmail.innerHTML = `Your email is ${email}</p>`;
+              pfpDisplay.innerHTML = `
+           <img src=${pic} alt="Profile pic" / width="30" style="border-radius: 50% ;">`;
+              userNameSm.innerHTML = `Welcome ${personName}</h3>`;
+              userEmailSm.innerHTML = `Your email is ${email}</p>`;
+              pfpDisplaySm.innerHTML = `
+           <img src=${pic} alt="Profile pic" width="30" style="border-radius: 50% ;">
+           `;
+              console.log(personName);
+              console.log(user);
+              if (snapshot.exists()) {
+                const userData = snapshot.val();
+                userName.innerHTML = `Welcome: ${personName}`;
+                userEmail.innerHTML = `Your email is: ${userData.email}`;
+                
+              } else {
+                console.log("No data available");
+              }
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const database = getDatabase(app);
-
-
-
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const userId = user.uid;
-
-                const dbRef = ref(database, `user_signUp_Info/${userId}`);
-                get(dbRef)
+              const subTodo = () => {
+                let textInput = document.getElementById("textInput").value;
+                let titleInput = document.getElementById("titleInput").value;
+                let dateInput = document.getElementById("dateInput").value;
+                let timeInput = document.getElementById("timeInput").value;
+                let userId = user.uid;
+                let selectedDate = new Date(`${dateInput}T00:00:00`);
+                let currentDate = new Date();
+                currentDate.setHours(0, 0, 0, 0);
+                const msPerDay = 24 * 60 * 60 * 1000;
+                const differenceInDays = Math.floor(
+                  (selectedDate - currentDate) / msPerDay
+                );
+                let restrictedDate = selectedDate < 1;
+                let existingTodo;
+                let otherDate;
+                let formattedDate;
+                if (differenceInDays === 0) {
+                  formattedDate = "Today";
+                } else if (differenceInDays === 1) {
+                  formattedDate = "Tomorrow";
+                } else {
+                  otherDate = selectedDate.toLocaleDateString("en-US", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  });
+                  formattedDate = otherDate;
+                }
+                let enterTodo = {
+                  title: titleInput,
+                  description: textInput,
+                  dateAdded: formattedDate,
+                  timeAdded: timeInput,
+                };
+                if (textInput == "") {
+                  alert("Please enter a description for your todo.");
+                } else if (titleInput == "") {
+                  alert("enter something");
+                } else if (dateInput == "") {
+                  alert("please select date");
+                } else if (timeInput == "") {
+                  alert("please select time");
+                } else if (selectedDate < currentDate) {
+                  alert("You cannot select a past date.");
+                } else {
+                  let dbRefTodo = ref(database, `user_all_todo/${userId}`);
+                  let dbRefScheTodo = ref(database, `user_sche_todo/${userId}`);
+                  bootstrap.Modal.getInstance(
+                    document.getElementById("staticBackdrop")
+                  ).hide();
+                  get(dbRefTodo)
                     .then((snapshot) => {
-                        let personName = user.displayName || `${snapshot.val().firstName} ${snapshot.val().lastName}`
-                        let email = user.email
-                        let pic = user.photoURL
-                        userName.innerHTML = `Welcome ${personName}</h3>`
-                        userEmail.innerHTML =`Your email is ${email}</p>`
-                        pfpDisplay.innerHTML=`
-                    <img src=${pic} alt="Profile pic" / width="30" style="border-radius: 50% ;">`
-                        userNameSm.innerHTML = `Welcome ${personName}</h3>`
-                        userEmailSm.innerHTML =`Your email is ${email}</p>`
-                        pfpDisplaySm.innerHTML=`
-                    <img src=${pic} alt="Profile pic" / width="30" style="border-radius: 50% ;">
-                    `;
+                      existingTodo = snapshot.exists() ? snapshot.val() : [];
+                      if (!Array.isArray(existingTodo)) {
+                        existingTodo = [];
+                      }
+                      existingTodo.unshift(enterTodo);
+                      return set(dbRefTodo, existingTodo);
+                    })
+                    .then(() => {
+                      console.log(`Todo added for user: ${userId}`);
 
-                        console.log(personName);
+                      if (formattedDate == otherDate) {
+                        return get(dbRefScheTodo).then((snapshot) => {
+                          let scheduledTodos = snapshot.exists()
+                            ? snapshot.val()
+                            : [];
+                          if (!Array.isArray(scheduledTodos)) {
+                            scheduledTodos = [];
+                          }
+                          scheduledTodos.unshift(enterTodo);
+                          return set(dbRefScheTodo, scheduledTodos);
+                        });
+                      }
+                    })
+                    .catch((error) => {
+                      console.error("Error adding todo:", error);
+                    });
+                }
+              };
+              window.subTodo = subTodo;
+              let newIndex;
 
-                        console.log(user);
-                        if (snapshot.exists()) {
-                            const userData = snapshot.val();
-                            userName.innerHTML = `Welcome: ${personName}`
-                            userEmail.innerHTML = `Your email is: ${userData.email}`
+              // const deleteTodo = (i) => {
+              //     console.log(i);
+              //     let dbRefTodo = ref(database, `user_all_todo/${userId}`);
+              //     get(dbRefTodo)
+              //         .then((snapshot) => {
+              //             if (snapshot.exists()) {
+              //                 let existingTodo = snapshot.val();
+              //                 if (!Array.isArray(existingTodo)) {
+              //                     existingTodo = [];
+              //                 }
+              //                 let compTodo = existingTodo[i];
+              //                 existingTodo.splice(i, 1);
+              //                 return set(dbRefTodo, existingTodo)
+              //                     .then(() => compTodo);
+              //             } else {
+              //                 throw new Error("No todos found");
+              //             }
+              //         }).then((compTodo) => {
+              //             let compDbRef = ref(database, `user_compTodo/${userId}`);
+              //             return get(compDbRef).then((shot) => {
+              //                 if (shot.exists()) {
+              //                     let allTodo = shot.val();
+              //                     if (!Array.isArray(allTodo)) {
+              //                         allTodo = [];
+              //                     }
+              //                     allTodo.unshift(compTodo);
+              //                     return set(compDbRef, allTodo);
+              //                 } else {
+              //                     return set(compDbRef, [compTodo]);
+              //                 }
+              //             });
+              //         }).then(() => {
+              //             if (differenceInDays > 0){
+              //                 console.log("dif is this");
+
+              //             }
+              //         })
+              //         .catch((error) => {
+              //             console.error("Error handling todo:", error);
+              //         });
+              // };
+
+              const displayTodo = (filteredTodo) => {
+                let currentDate = new Date();
+
+                let dbRefTodo = ref(database, `user_all_todo/${userId}`);
+                if (filteredTodo) {
+                  let todoList = filteredTodo;
+
+                  taskNum.innerHTML = "";
+                  console.log("this is the todo you just added");
+                  console.log(todoList);
+                  console.log(todoList.length);
+                  document.getElementById("showAllTodo").innerHTML = "";
+                  todoList.map((a, b) => {
+                    let todoDateTime = new Date(
+                      `${a.dateAdded}T${a.timeAdded}`
+                    );
+                    let isOverdue = currentDate > todoDateTime;
+                    console.log(a.description);
+                    document.getElementById("showAllTodo").innerHTML += `
+                <div>
+                    <div class="titelCon">
+                    <div class="">
+                         <div class="checkbox-wrapper">
+  <div class="checkbox-container" onclick="comChecker(${a.originalIndex})">
+    <input type="checkbox" onclick="comToggle(${
+      a.originalIndex
+    })" id="checkbox${a.originalIndex}" >
+    <span class="checkbox"></span>
+  </div>
+</div>
+
+<div>
+<h4>${a.title}</h4>
+<small>${a.dateAdded} ${a.timeAdded}</small>
+${
+                          isOverdue
+                          ? `<span style="color:red;">(Overdue Task)</span>`
+                          : ""
+                          }
+                          </div>
+                          </div>
+                          
+                        <div class="edDeBtn">
+                        <button type="button" class="edit-button" id="editBtn${
+                          a.originalIndex
+                        }"  data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="editTodo(${
+                      a.originalIndex
+                    })">
+                   <svg class="edit-svgIcon" viewBox="0 0 512 512">
+                    <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+                  </svg>
+                    </button>
+                   
+                        <button type="button" class="delete-button" id="deleteBtn${
+                          a.originalIndex
+                        }" onclick="deleteTodo(${
+                      a.originalIndex
+                    })" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                         <svg class="delete-svgIcon" viewBox="0 0 448 512">
+                        <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
+                      </svg>
+                        </button>
+                        </div>
+                        </div>
+                        <div>${a.description}</div>
+                </div>
+            `;
+                  });
+                } else {
+                  onValue(dbRefTodo, (snapshot2) => {
+                    document.getElementById("showAllTodo").innerHTML = "";
+                    if (snapshot2.exists()) {
+                      let todoList = snapshot2.val();
+                      taskNum.innerHTML = `Total task: ${todoList.length}`;
+
+                      console.log("this is the todo you just added");
+                      console.log(todoList);
+                      console.log(todoList.length);
+                      todoList.map((a, b) => {
+                        console.log(b);
+                        let todoDateTime = new Date(
+                          `${a.dateAdded}T${a.timeAdded}`
+                        );
+                        let isOverdue = currentDate > todoDateTime;
+                        console.log(a.description);
+                        document.getElementById("showAllTodo").innerHTML += `
+                       
+                                             <div class="allTodoCon">
+                                             <div class="titelCon">
+                                             <div class="jobTitle">
+                                                 <div class="checkbox-wrapper">
+                                             <div class="checkbox-container" onclick="comChecker(${b})">
+                                               <input type="checkbox" onclick="comToggle(${b})" id="checkbox${b}" >
+                                               <span class="checkbox"></span>
+                                             </div>
+                                            </div>
+                                            <div class="titleDiv" >
+                                           <div> ${a.title}</div>
+                            </div>
+                            </div>
+                           
+                            
+                                              <div class="edDeBtn" >
+                                             <button type="button" class="edit-button" id="editBtn${b}"  data-bs-toggle="modal"  data-bs-target="#staticBackdrop2" onclick="editTodo(${b})">
+                   <svg class="edit-svgIcon" viewBox="0 0 512 512">
+                    <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+                  </svg>
+                    </button>
+                    <button type="button" class="delete-button" id="deleteBtn${b}" onclick="deleteTodo(${b})" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                     <svg class="delete-svgIcon" viewBox="0 0 448 512">
+                    <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
+                  </svg>
+                    </button>
+                        </div>
+                        </div>
+                        
+                      
+                        <div class="descripDiv">
+                          <div>${a.description}</div></div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                          <small>${a.dateAdded} ${
+                                                a.timeAdded
+                        }</small>
+                        ${
+                            isOverdue
+                            ? `<span style="color:red;">(Overdue Task)</span>`
+                            : ""
+                            }
+                            <div>Drop Down</div>
+                        </div>
+                        </div>
+                   `;
+                        //    document.getElementById("dateDis").innerHTML += "over due"
+                      });
+                    } else {
+                      console.log("no todo");
+                      taskNum.innerHTML = "Total task: 0";
+                    }
+                  });
+                }
+              };
+              const comChecker = (b) => {
+                document.getElementById(`checkbox${b}`).click();
+              };
+              window.comChecker = comChecker;
+
+              displayTodo();
+              window.displayTodo = displayTodo;
+              const editTodo = (index) => {
+                newIndex = index;
+                let userId = user.uid;
+                let dbRefTodo = ref(database, `user_all_todo/${userId}`);
+                let today = new Date();
+                let formattedToday = today.toISOString().slice(0, 10);
+                document
+                  .getElementById("dateInputEd")
+                  .setAttribute("min", formattedToday);
+                get(dbRefTodo)
+                  .then((snapshot) => {
+                    if (snapshot.exists()) {
+                      let inputDpyTodo = snapshot.val()[index];
+                      document.getElementById("textInputEd").value =
+                        inputDpyTodo.description;
+                      document.getElementById("titleInputEd").value =
+                        inputDpyTodo.title;
+                      document.getElementById("timeInputEd").value =
+                        inputDpyTodo.timeAdded;
+                      let formattedDate = inputDpyTodo.dateAdded;
+                      let dateInputElement =
+                        document.getElementById("dateInputEd");
+                      if (formattedDate === "Today") {
+                        dateInputElement.value = today
+                          .toISOString()
+                          .slice(0, 10);
+                      } else if (formattedDate === "Tomorrow") {
+                        let tomorrow = new Date();
+                        tomorrow.setDate(tomorrow.getDate() + 1);
+                        dateInputElement.value = tomorrow
+                          .toISOString()
+                          .slice(0, 10);
+                      } else {
+                        let parsedDate = new Date(formattedDate);
+                        if (!isNaN(parsedDate)) {
+                          dateInputElement.value = parsedDate
+                            .toISOString()
+                            .slice(0, 10);
                         } else {
-                            console.log("No data available");
+                          console.log("Invalid date format");
                         }
-                    }).catch((error) => {
-                        console.log(error);
-                    });
-            }
-            else {
-                window.location.href = 'index.html';
-            }
-        });
+                      }
+                    } else {
+                      console.log("no todo in this index ");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error("Error fetching todo:", error);
+                  });
+              };
+              window.editTodo = editTodo;
+              const subTodoEd = () => {
+                let textInput = document.getElementById("textInputEd").value;
+                let titleInput = document.getElementById("titleInputEd").value;
+                let dateInput = document.getElementById("dateInputEd").value;
+                let timeInput = document.getElementById("timeInputEd").value;
+                let userId = user.uid;
+                let selectedDate = new Date(`${dateInput}T00:00:00`);
+                let currentDate = new Date();
+                currentDate.setHours(0, 0, 0, 0);
+                const msPerDay = 24 * 60 * 60 * 1000;
+                const differenceInDays = Math.floor(
+                  (selectedDate - currentDate) / msPerDay
+                );
+                let formattedDate;
+                if (differenceInDays === 0) {
+                  formattedDate = "Today";
+                } else if (differenceInDays === 1) {
+                  formattedDate = "Tomorrow";
+                } else {
+                  formattedDate = selectedDate.toLocaleDateString("en-US", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  });
+                }
+                let enterTodoEd = {
+                  title: titleInput,
+                  description: textInput,
+                  dateAdded: formattedDate,
+                  timeAdded: timeInput,
+                };
+                if (textInput == "") {
+                  alert("Please enter a descriptions for your todo.");
+                } else if (titleInput == "") {
+                  alert("enter something");
+                } else if (dateInput == "") {
+                  alert("please select date");
+                } else if (timeInput == "") {
+                  alert("please select time");
+                } else {
+                  let dbRefTodo = ref(database, `user_all_todo/${userId}`);
+                  bootstrap.Modal.getInstance(
+                    document.getElementById("staticBackdrop2")
+                  ).hide();
+                  let editBtn = document.getElementById(`editBtn${newIndex}`);
+                  document.getElementById(
+                    `deleteBtn${newIndex}`
+                  ).style.display = "none";
+                  editBtn.classList.add("editBtnDone");
+                  setTimeout(() => {
+                    get(dbRefTodo)
+                      .then((snapshot) => {
+                        let existingTodo = snapshot.exists()
+                          ? snapshot.val()
+                          : [];
 
+                        if (!Array.isArray(existingTodo)) {
+                          existingTodo = [];
+                        }
+                        existingTodo.splice(newIndex, 1, enterTodoEd);
+                        return set(dbRefTodo, existingTodo);
+                      })
+                      .then(() => {
+                        // console.log(`Todo added for user: ${userId}`);
+                        cancelBtn.click();
+                        if (differenceInDays > 0) {
+                          let dbRefScheTodo = ref(
+                            database,
+                            `user_sche_todo/${userId}`
+                          );
+                          return get(dbRefScheTodo).then((snapshot) => {
+                            let scheduledTodos = snapshot.exists()
+                              ? snapshot.val()
+                              : [];
+                            if (!Array.isArray(scheduledTodos)) {
+                              scheduledTodos = [];
+                            }
+                            scheduledTodos.splice(newIndex, 1, enterTodoEd);
+                            return set(dbRefScheTodo, scheduledTodos);
+                          });
+                        }
+                      })
+                      .catch((error) => {
+                        console.error("Error adding todo:", error);
+                      });
+                  }, 1000);
+                }
+              };
+              window.subTodoEd = subTodoEd;
 
-        // background color toggle
-        const bgChanger = document.getElementById('bgChanger');
-        const elementsToToggle = document.querySelectorAll('body, label, input, a');
-        let darkMode = localStorage.getItem('darkMode')
+              let deleIndex;
+              const deleteTodo = (i) => {
+                deleIndex = i;
+              };
+              window.deleteTodo = deleteTodo;
+              const saveDelete = () => {
+                let dbRefTodo = ref(database, `user_all_todo/${userId}`);
+                let dbRefScheTodo = ref(database, `user_sche_todo/${userId}`);
+                bootstrap.Modal.getInstance(
+                  document.getElementById("exampleModal")
+                ).hide();
+                let deleteBtn = document.getElementById(
+                  `deleteBtn${deleIndex}`
+                );
+                document.getElementById(`editBtn${deleIndex}`).style.display =
+                  "none";
+                deleteBtn.classList.add("deleteBtnDone");
 
-
-        const enableDark = () => {
-            elementsToToggle.forEach(elements => {
-                elements.classList.add('dark-mode')
-                elements.classList.remove('light-mode')
-            });
-            localStorage.setItem('darkMode', 'enabled')
-        }
-        window.enableDark = enableDark
-        const disableDark = () => {
-            elementsToToggle.forEach(elements => {
-                elements.classList.add('light-mode')
-                elements.classList.remove('dark-mode')
-            });
-            localStorage.setItem('darkMode', 'disabled')
-        }
-        window.disableDark = disableDark
-
-        if (darkMode == 'enabled') {
-            enableDark()
-            document.getElementById('light').style = "display:block;"
-            document.getElementById('dark').style = "display:none;"
-            document.getElementById('searchBtn').style="background-color: #555252;background-image: url(img/search-light-mode.svg);"
-            document.getElementById('displayHbg').style="background-image: url(img/hamburger-menu-light-mode.svg);"
-            document.getElementById('hideHbg').style=" background-image: url(img/cancel-close-delete-light-mode.svg);"
-        } else {
-            disableDark()
-            document.getElementById('light').style = "display:none;"
-            document.getElementById('dark').style = "display:block;"
-            document.getElementById('searchBtn').style="background-color: #f3f1f1; background-image: url(img/search-alt-svgrepo-com.svg);"
-            document.getElementById('displayHbg').style="background-image: url(img/hamburger-menu-svgrepo-com.svg);"
-            document.getElementById('hideHbg').style=" background-image: url(img/cancel-close-delete-svgrepo-com.svg);"
-
-        }
-
-        bgChanger.addEventListener('click', () => {
-            darkMode = localStorage.getItem('darkMode')
-            if (darkMode == 'enabled') {
-                disableDark()
-                document.getElementById('light').style = "display:none;"
-                document.getElementById('dark').style = "display:block;"
-            document.getElementById('searchBtn').style="background-color: #f3f1f1; background-image: url(img/search-alt-svgrepo-com.svg);"
-            document.getElementById('displayHbg').style="background-image: url(img/hamburger-menu-svgrepo-com.svg);"
-            document.getElementById('hideHbg').style=" background-image: url(img/cancel-close-delete-svgrepo-com.svg);"
-            
-        } else {
-                enableDark()
-                document.getElementById('light').style = "display:block;"
-                document.getElementById('dark').style = "display:none;"
-                document.getElementById('searchBtn').style="background-color: #555252;background-image: url(img/search-light-mode.svg);"
-                document.getElementById('displayHbg').style="background-image: url(img/hamburger-menu-light-mode.svg);"
-            document.getElementById('hideHbg').style=" background-image: url(img/cancel-close-delete-light-mode.svg);"
-
-            }
-        })
-
-        document.getElementById('signOuted').addEventListener('click', () => {
-            let comfirmed = confirm('are sure you want to sign out')
-            if (comfirmed == true) {
-                signOut(auth)
-                    .then(() => {
-                        console.log('User signed out');
-                        window.location.href = 'index.html'
-                    })
-                    .catch((error) => {
-                        console.error('Error signing out:', error);
-                    });
-            }
-
-            else {
-                comfirmed = false
-            }
-        });
-        document.getElementById('signOutedSm').addEventListener('click', () => {
-            let comfirmed = confirm('are sure you want to sign out')
-            if (comfirmed == true) {
-                signOut(auth)
-                    .then(() => {
-                        console.log('User signed out');
-                        window.location.href = 'index.html'
-                    })
-                    .catch((error) => {
-                        console.error('Error signing out:', error);
-                    });
-            }
-
-            else {
-                comfirmed = false
-            }
-        });
-
-        let searchBtn = document.getElementById('searchBtn')
-        let searchInput = document.getElementById('searchInput')
-        let searchBar = document.getElementById('searchBar')
-        
-        searchBtn.addEventListener('click', () => {
-            searchInput.classList.add('searchInputSm')
-            searchBtn.style=""
-            searchInput.focus()
-            utiCon.classList.add('utiConSm')
-            searchBar.style =""
-            darkMode = localStorage.getItem('darkMode')
-            if(darkMode == 'enabled'){
-                searchBtn.classList.add('buttonSm_N')
-                searchBar.classList.add('searchBarSm_N')
-                bgChanger.classList.add('dashBgSm')
-                cancelCon.classList.add('cancelConSm')
-                cancelBtn.style.display="block"
-                localStorage.setItem('darkMode', 'enabled')
-            }else{
-                searchBtn.classList.add('buttonSm_L')
-                searchBar.classList.add('searchBarSm_L')
-                cancelCon.classList.add('cancelConSm')
-                cancelBtn.style.display="block"
-                bgChanger.classList.add('dashBgSm')
-                localStorage.setItem('darkMode', 'disabled')
-            }
-        })
-        searchInput.addEventListener('blur', () => {
-            
-            cancelCon.classList.remove('cancelConSm')
-            cancelBtn.style.display=""
-            searchInput.value=""
-            searchInput.classList.remove('searchInputSm')
-            searchBtn.classList.remove('buttonSm_N')
-            searchBtn.classList.remove('buttonSm_L')
-            searchBar.classList.remove('searchBarSm_N')
-            searchBar.classList.remove('searchBarSm_L')
-            bgChanger.classList.remove('dashBgSm')
-            utiCon.classList.remove('utiConSm')
-            searchInput.style=""
-            darkMode = localStorage.getItem('darkMode')
-            if(darkMode == 'enabled'){
-                searchBar.style = "transition: 0ms;"
-                localStorage.setItem('darkMode', 'enabled')
-                document.getElementById('searchBtn').style="background-color: #555252;background-image: url(img/search-light-mode.svg);"
-            }else{
-                searchBar.style = " transition: 0ms;"
-                localStorage.setItem('darkMode', 'disabled')
-            document.getElementById('searchBtn').style="background-color: #f3f1f1; background-image: url(img/search-alt-svgrepo-com.svg);"
-            }
-        })
-
-        let displayHbg = document.getElementById('displayHbg')
-        let hideHbg = document.getElementById('hideHbg')
-        let hbgToggle = document.getElementById('hbgToggle')
-        let sideBar = document.getElementById('sideBar')
-        displayHbg.style.display="block"
-        // sideBar.style.display="none"
-        hbgToggle.addEventListener('click', ()=>{
-            if(displayHbg.style.display==="block"){
-                hideHbg.style.display="block"
-                displayHbg.style.display="none"
-                sideBar.style.display="block"
-                sideBar.classList.add('sideBarHide')
-            }
-            else{
-                displayHbg.style.display="block"
-                hideHbg.style.display="none"
-                sideBar.classList.remove('sideBarHide')
-                sideBar.classList.add('sideBarShow')
                 setTimeout(() => {
-                    sideBar.style.display="none"
-                }, 400);
-                
-            }
-        })
+                  cancelBtn.click();
+                  get(dbRefTodo)
+                    .then((snapshot) => {
+                      if (snapshot.exists()) {
+                        let existingTodo = snapshot.val();
+                        if (!Array.isArray(existingTodo)) {
+                          existingTodo = [];
+                        }
+                        let deletedTodo = existingTodo[deleIndex];
+                        existingTodo.splice(deleIndex, 1);
+                        return set(dbRefTodo, existingTodo).then(
+                          () => deletedTodo
+                        );
+                      } else {
+                        throw new Error("No todos found");
+                      }
+                    })
+                    .then((deletedTodo) => {
+                      return get(dbRefScheTodo).then((snapshot) => {
+                        if (snapshot.exists()) {
+                          let scheduledTodos = snapshot.val();
+                          if (!Array.isArray(scheduledTodos)) {
+                            scheduledTodos = [];
+                          }
+                          let indexToDelete = scheduledTodos.findIndex(
+                            (todo) =>
+                              todo.title === deletedTodo.title &&
+                              todo.dateAdded === deletedTodo.dateAdded
+                          );
 
-        // const cancelBtn = ()=>{
-        //     searchInput.value=""
-        //     console.log('this just click on');
+                          if (indexToDelete > -1) {
+                            scheduledTodos.splice(indexToDelete, 1);
+                            return set(dbRefScheTodo, scheduledTodos);
+                          }
+                        }
+                      });
+                    })
+                    // .then(() => {
+
+                    // })
+                    .catch((error) => {
+                      console.error("Error handling todo:", error);
+                    });
+                }, 1000);
+              };
+              window.saveDelete = saveDelete;
+
+              const comToggle = (i) => {
+                let dbRefTodo = ref(database, `user_all_todo/${userId}`);
+                let dbRefScheTodo = ref(database, `user_sche_todo/${userId}`);
+                let dbRefCompTodo = ref(database, `user_compTodo/${userId}`);
+
+                setTimeout(() => {
+                  get(dbRefTodo)
+                    .then((snapshot) => {
+                      if (snapshot.exists()) {
+                        let existingTodo = snapshot.val();
+                        if (!Array.isArray(existingTodo)) {
+                          existingTodo = [];
+                        }
+                        let compTodo = existingTodo[i];
+                        existingTodo.splice(i, 1);
+                        return set(dbRefTodo, existingTodo).then(
+                          () => compTodo
+                        );
+                      } else {
+                        throw new Error("No todos found");
+                      }
+                    })
+
+                    .then((compTodo) => {
+                      cancelBtn.click();
+                      return get(dbRefCompTodo).then((snapshot) => {
+                        let completedTodos = snapshot.exists()
+                          ? snapshot.val()
+                          : [];
+                        if (!Array.isArray(completedTodos)) {
+                          completedTodos = [];
+                        }
+                        completedTodos.unshift(compTodo);
+                        return set(dbRefCompTodo, completedTodos).then(
+                          () => compTodo
+                        );
+                      });
+                    })
+                    .then((compTodo) => {
+                      return get(dbRefScheTodo).then((snapshot) => {
+                        if (snapshot.exists()) {
+                          let scheduledTodos = snapshot.val();
+                          if (!Array.isArray(scheduledTodos)) {
+                            scheduledTodos = [];
+                          }
+                          let indexToDelete = scheduledTodos.findIndex(
+                            (todo) =>
+                              todo.title === compTodo.title &&
+                              todo.dateAdded === compTodo.dateAdded
+                          );
+
+                          if (indexToDelete > -1) {
+                            scheduledTodos.splice(indexToDelete, 1);
+                            return set(dbRefScheTodo, scheduledTodos);
+                          }
+                        }
+                      });
+                    })
+                    // .then(() => {
+                    //     console.log("Todo successfully deleted from all relevant lists.");
+
+                    // })
+                    .catch((error) => {
+                      console.error("Error handling todo:", error);
+                    });
+                }, 1500);
+              };
+
+              window.comToggle = comToggle;
+              const searchInput = document.getElementById("searchInput");
+              searchInput.addEventListener("input", () => {
+                const searchQuery = searchInput.value.toLowerCase();
+                const dbRefTodo = ref(database, `user_all_todo/${userId}`);
+                get(dbRefTodo)
+                  .then((snapshot) => {
+                    if (snapshot.exists()) {
+                      let todos = snapshot.val();
+
+                      if (!Array.isArray(todos)) {
+                        todos = [];
+                      }
+
+                      // Filter todos and store their original index
+                      const filteredTodos = todos
+                        .map((todo, index) => ({
+                          ...todo,
+                          originalIndex: index,
+                        }))
+                        .filter(
+                          (todo) =>
+                            todo.title.toLowerCase().includes(searchQuery) ||
+                            todo.description.toLowerCase().includes(searchQuery)
+                        );
+
+                      // Display filtered todos
+                      displayTodo(filteredTodos);
+                    }
+                  })
+                  .catch((error) => {
+                    console.error("Error fetching todos:", error);
+                  });
+              });
+              document.getElementById("loaderCon").style = "display:none;";
+            })
             
-        // }
-        // displayHbg.addEventListener('focus', ()=>{
-        //     darkMode = localStorage.getItem('darkMode')
-            
-        // if (darkMode=='disabled') {
-        //     displayHbg.style="background-image: url(img/hamburger-svgrepo-com.svg);"
-        //         hideHbg.style="background-image: url(img/cancel-close-delete-svgrepo-com.svg);"
-        //     }
-        //     else{
-                
-                
-        //     }
-        // })
+            .catch((error) => {
+              // document.getElementById("loaderCon").style = "display:none;";
+              console.log(error);
+            });
+        } else {
+          window.location.href = "index.html";
+        }
+      });
+
+      const bgChanger = document.getElementById("bgChanger");
+      const elementsToToggle = document.querySelectorAll(
+        "body, label, input, a"
+      );
+      const hbBg = document.querySelectorAll(".hbBg");
+      let darkMode = localStorage.getItem("darkMode");
+      const enableDark = () => {
+        elementsToToggle.forEach((elements) => {
+          elements.classList.add("dark-mode");
+          elements.classList.remove("light-mode");
+        });
+        hbBg.forEach((elements) => {
+          elements.style.backgroundColor = "white";
+        });
+        document.getElementById("searchBtn").style =
+          "background-color: #555252;background-image: url(img/search-light-mode.svg);";
+        bgChanger.style.backgroundColor = "#555252";
+        localStorage.setItem("darkMode", "enabled");
+      };
+      window.enableDark = enableDark;
+      const disableDark = () => {
+        elementsToToggle.forEach((elements) => {
+          elements.classList.add("light-mode");
+          elements.classList.remove("dark-mode");
+        });
+        hbBg.forEach((elements) => {
+          elements.style.backgroundColor = "black";
+        });
+        document.getElementById("searchBtn").style =
+          "background-color: #f3f1f1; background-image: url(img/search-alt-svgrepo-com.svg);";
+        bgChanger.style.backgroundColor = "#f3f1f1";
+        localStorage.setItem("darkMode", "disabled");
+      };
+      window.disableDark = disableDark;
+      if (darkMode == "enabled") {
+        enableDark();
+        document.getElementById("light").style = "display:block;";
+        document.getElementById("dark").style = "display:none;";
+      } else {
+        disableDark();
+        document.getElementById("light").style = "display:none;";
+        document.getElementById("dark").style = "display:block;";
+      }
+      bgChanger.addEventListener("click", () => {
+        darkMode = localStorage.getItem("darkMode");
+        if (darkMode == "enabled") {
+          disableDark();
+          document.getElementById("light").style = "display:none;";
+          document.getElementById("dark").style = "display:block;";
+          cancelBtn.click();
+        } else {
+          enableDark();
+          document.getElementById("light").style = "display:block;";
+          document.getElementById("dark").style = "display:none;";
+          cancelBtn.click();
+        }
+      });
+      document.getElementById("signOuted").addEventListener("click", () => {
+        let comfirmed = confirm("are sure you want to sign out");
+        if (comfirmed == true) {
+          signOut(auth)
+            .then(() => {
+              console.log("User signed out");
+              window.location.href = "index.html";
+            })
+            .catch((error) => {
+              console.error("Error signing out:", error);
+            });
+        } else {
+          comfirmed = false;
+        }
+      });
+      document.getElementById("signOutedSm").addEventListener("click", () => {
+        let comfirmed = confirm("are sure you want to sign out");
+        if (comfirmed == true) {
+          signOut(auth)
+            .then(() => {
+              console.log("User signed out");
+              window.location.href = "index.html";
+            })
+            .catch((error) => {
+              console.error("Error signing out:", error);
+            });
+        } else {
+          comfirmed = false;
+        }
+      });
+      let searchBtn = document.getElementById("searchBtn");
+      // let searchInput = document.getElementById("searchInput");
+      let searchBar = document.getElementById("searchBar");
+      searchBtn.addEventListener("click", () => {
+        searchInput.classList.add("searchInputSm");
+        searchBtn.style = "";
+        searchInput.focus();
+        utiCon.classList.add("utiConSm");
+        searchBar.style = "";
+        darkMode = localStorage.getItem("darkMode");
+        if (darkMode == "enabled") {
+          searchBtn.classList.add("buttonSm_N");
+          searchBar.classList.add("searchBarSm_N");
+          bgChanger.classList.add("dashBgSm");
+          cancelCon.classList.add("cancelConSm");
+          cancelBtn.style.display = "block";
+          localStorage.setItem("darkMode", "enabled");
+        } else {
+          searchBtn.classList.add("buttonSm_L");
+          searchBar.classList.add("searchBarSm_L");
+          cancelCon.classList.add("cancelConSm");
+          cancelBtn.style.display = "block";
+          bgChanger.classList.add("dashBgSm");
+          localStorage.setItem("darkMode", "disabled");
+        }
+      });
+      cancelBtn.addEventListener("click", () => {
+        displayTodo();
+        cancelCon.classList.remove("cancelConSm");
+        cancelBtn.style.display = "";
+        searchInput.value = "";
+        searchInput.classList.remove("searchInputSm");
+        searchBtn.classList.remove("buttonSm_N");
+        searchBtn.classList.remove("buttonSm_L");
+        searchBar.classList.remove("searchBarSm_N");
+        searchBar.classList.remove("searchBarSm_L");
+        bgChanger.classList.remove("dashBgSm");
+        utiCon.classList.remove("utiConSm");
+        searchInput.style = "";
+        darkMode = localStorage.getItem("darkMode");
+        if (darkMode == "enabled") {
+          searchBar.style = "transition: 0ms;";
+          localStorage.setItem("darkMode", "enabled");
+          document.getElementById("searchBtn").style =
+            "background-color: #555252;background-image: url(img/search-light-mode.svg);";
+        } else {
+          searchBar.style = " transition: 0ms;";
+          localStorage.setItem("darkMode", "disabled");
+          document.getElementById("searchBtn").style =
+            "background-color: #f3f1f1; background-image: url(img/search-alt-svgrepo-com.svg);";
+        }
+      });
+      // let displayHbg = document.getElementById("displayHbg");
+      // let hideHbg = document.getElementById("hideHbg");
+      // let hbgToggle = document.getElementById("hbgToggle");
+      // let sideBar = document.getElementById("sideBar");
+      // displayHbg.style.display = "block";
+      // sideBar.style.display="none"
+      // hbgToggle.addEventListener("click", () => {
+      //     if (displayHbg.style.display === "block") {
+      //         setTimeout(() => {
+      //             // hideHbg.style.display = "block";//
+      //             // displayHbg.style.display = "none";
+      //         }, 100);
+      //         sideBar.style.display = "block";
+      //         sideBar.classList.add("sideBarHide");
+      //     } else {
+      //         setTimeout(() => {
+      //             // displayHbg.style.display = "block";
+      //             // hideHbg.style.display = "none";
+      //         }, 100);
+      //         sideBar.classList.remove("sideBarHide");
+      //         sideBar.classList.add("sideBarShow");
+      //         setTimeout(() => {
+      //             sideBar.style.display = "none";
+      //         }, 400);
+      //     }
+      // });
+
+      document.getElementById("hbIcon").addEventListener("click", () => {
+        document.getElementById("hbToggle").click();
+        cancelBtn.click();
+      });
+
+      document
+        .getElementById("hbToggle")
+        .addEventListener("click", function () {
+          const sideBar = document.getElementById("sideBar");
+          if (sideBar.style.left === "0px") {
+            sideBar.style.left = "-350px";
+          } else {
+            sideBar.style.left = "0px";
+            console.log("side bar is now now 0");
+          }
+        });
     </script>
-</body>
-
+  </body>
 </html>

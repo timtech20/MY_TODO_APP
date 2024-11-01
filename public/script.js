@@ -21,6 +21,7 @@ const providerTwo = new FacebookAuthProvider();
 const providerThree = new TwitterAuthProvider();
 const database = getDatabase(app);
 
+ 
 
 const signInG = () => {
   signInWithPopup(auth, provider)
@@ -29,6 +30,8 @@ const signInG = () => {
       const user = result.user;
       console.log(user);
       window.location.href = 'dashboard.html';
+      document.getElementById('con').style = "display:grid;"
+
     }).catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -36,6 +39,7 @@ const signInG = () => {
       const credential = GoogleAuthProvider.credentialFromError(error);
 
       console.log(errorCode, errorMessage, error);
+      document.getElementById('con').style = "display:none;"
 
     });
 }
@@ -49,7 +53,7 @@ const signInF = () => {
       const user = result.user;
       console.log(user);
       window.location.href = 'dashboard.html';
-
+      document.getElementById('con').style = "display:grid;"
     })
     .catch((error) => {
 
@@ -59,38 +63,42 @@ const signInF = () => {
       const email = error.customData.email;
 
       const credential = FacebookAuthProvider.credentialFromError(error);
+      document.getElementById('con').style = "display:none;"
 
 
     });
 }
 window.signInF = signInF
 
-const signInX = () => {
-  const auth = getAuth();
-  signInWithPopup(auth, providerThree)
-    .then((result) => {
-      const credential = TwitterAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      const secret = credential.secret;
-      const user = result.user;
-      console.log(user);
-      window.location.href = 'dashboard.html';
+// const signInX = () => {
+//   const auth = getAuth();
+//   signInWithPopup(auth, providerThree)
+//     .then((result) => {
+//       const credential = TwitterAuthProvider.credentialFromResult(result);
+//       const token = credential.accessToken;
+//       const secret = credential.secret;
+//       const user = result.user;
+//       console.log(user);
+//       window.location.href = 'dashboard.html';
+//       document.getElementById('con').style = "display:grid;"
 
-    }).catch((error) => {
+//     }).catch((error) => {
 
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      const email = error.customData.email;
-      const credential = TwitterAuthProvider.credentialFromError(error);
+//       const errorCode = error.code;
+//       const errorMessage = error.message;
+//       const email = error.customData.email;
+//       const credential = TwitterAuthProvider.credentialFromError(error);
 
-      console.log(errorCode);
-      console.log(errorMessage);
-      console.log(email);
-      console.log(credential);
-    });
-}
+//       console.log(errorCode);
+//       console.log(errorMessage);
+//       console.log(email);
+//       console.log(credential);
+//     document.getElementById('con').style = "display:none;"
 
-window.signInX = signInX
+//     });
+// }
+
+// window.signInX = signInX
 
 let LogInput = document.getElementById('LogInput')
 let LogInput2 = document.getElementById('LogInput2')
@@ -133,7 +141,7 @@ const signIn = () => {
 window.signIn = signIn
 
 
-
+// let userId
 const inputGroup = document.getElementById('inputGroup')
 const inputGroup2 = document.getElementById('inputGroup2')
 const inputGroup3 = document.getElementById('inputGroup3')
@@ -172,7 +180,7 @@ const signUpp = () => {
   }
   else if (!passwordRegex.test(passwordUp)) {
     inputGroup4.classList.add('inputB4')
-    document.getElementById("passwordUpError").innerHTML = "this password must be 8 characters long!"
+    document.getElementById("passwordUpError").innerHTML = "Wick password, Please make it strong!"
   }
   else if (comPasswordUp.trim() == "") {
     inputGroup5.classList.add('inputB5')
@@ -184,10 +192,9 @@ const signUpp = () => {
   } else {
     document.getElementById('con').style = "display:grid;"
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, emailUp, passwordUp)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
+    createUserWithEmailAndPassword(auth, emailUp, passwordUp).then((userCredential) => {
+      const user = userCredential.user;
+      console.log(user);
         let userId = user.uid
         let userInfo = {
           firstName: firstName,
@@ -207,7 +214,9 @@ const signUpp = () => {
           document.getElementById("logForm").style = "display:flex;"
           document.getElementById("signUpForm").style = "display:none;"
           localStorage.setItem('userReload', 'signIn')
-        })
+        })    
+        
+    
 
 
       })
@@ -216,12 +225,13 @@ const signUpp = () => {
         const errorMessage = error.message;
         console.log(errorCode);
         console.log(errorMessage);
-        document.getElementById("emailUpError").innerHTML = "email already in use!"
+        document.getElementById("emailUpError").innerHTML = "Email already in use or Invalid email address !"
         document.getElementById('con').style = "display:none;"
       });
   }
 }
 window.signUpp = signUpp
+
 
 // const fetchAndDisplayUserData = (userId) => {
 //   const dbRef = ref(database, `user_signUp_Info/${userId}`);
